@@ -1,0 +1,14 @@
+C:\h2\Opgave1\Opgave1\bin\Debug\net6.0\Opgave1.exe
+C:\h2\Opgave1\Opgave1\bin\Debug\net6.0\Opgave1.deps.json
+C:\h2\Opgave1\Opgave1\bin\Debug\net6.0\Opgave1.runtimeconfig.json
+C:\h2\Opgave1\Opgave1\bin\Debug\net6.0\Opgave1.dll
+C:\h2\Opgave1\Opgave1\bin\Debug\net6.0\Opgave1.pdb
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.GeneratedMSBuildEditorConfig.editorconfig
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.AssemblyInfoInputs.cache
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.AssemblyInfo.cs
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.csproj.CoreCompileInputs.cache
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.dll
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\refint\Opgave1.dll
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.pdb
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\Opgave1.genruntimeconfig.cache
+C:\h2\Opgave1\Opgave1\obj\Debug\net6.0\ref\Opgave1.dll

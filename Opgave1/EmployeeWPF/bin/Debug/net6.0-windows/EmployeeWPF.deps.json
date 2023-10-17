@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "EmployeeWPF/1.0.0": {
+        "dependencies": {
+          "EmployeeBLL": "1.0.0"
+        },
+        "runtime": {
+          "EmployeeWPF.dll": {}
+        }
+      },
+      "EmployeeBLL/1.0.0": {
+        "runtime": {
+          "EmployeeBLL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EmployeeWPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EmployeeBLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

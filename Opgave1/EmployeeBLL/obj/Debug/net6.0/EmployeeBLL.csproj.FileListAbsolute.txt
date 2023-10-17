@@ -1,0 +1,11 @@
+C:\h2\Opgave1\EmployeeBLL\bin\Debug\net6.0\EmployeeBLL.deps.json
+C:\h2\Opgave1\EmployeeBLL\bin\Debug\net6.0\EmployeeBLL.dll
+C:\h2\Opgave1\EmployeeBLL\bin\Debug\net6.0\EmployeeBLL.pdb
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.AssemblyInfoInputs.cache
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.AssemblyInfo.cs
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.csproj.CoreCompileInputs.cache
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.dll
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\refint\EmployeeBLL.dll
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\EmployeeBLL.pdb
+C:\h2\Opgave1\EmployeeBLL\obj\Debug\net6.0\ref\EmployeeBLL.dll

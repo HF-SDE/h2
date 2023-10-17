@@ -1,0 +1,35 @@
+﻿<Window x:Class="EmployeeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeWPF" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="300" Height="300">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label>First Name:</Label>
+        <TextBox x:Name="sirName" Grid.Column="1" Margin="0,0,0,10" Text="{Binding AcceptsReturn.TrueString, ElementName=sirName}"/>
+        <Label Grid.Row="1">Last Name:</Label>
+        <TextBox x:Name="surName" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" Text="{Binding AcceptsReturn.TrueString, ElementName=sirName}"/>
+        <Button Grid.Row="2" Name="btn1" Background="Pink" 
+        BorderBrush="Black" BorderThickness="1" 
+        Click="OnClick1" ClickMode="Hover" Grid.Column="1" Margin="35,0,105,0">
+            Get Id
+        </Button>
+        <Label Grid.Row="3">ID:</Label>
+        <TextBlock x:Name="ID" Grid.Row="3" Grid.Column="2" Text="" />
+        <Label Grid.Row="4">Mail:</Label>
+        <TextBlock x:Name="MAIL" Grid.Row="4" Grid.Column="2" Text=""/>
+    </Grid>
+</Window>
