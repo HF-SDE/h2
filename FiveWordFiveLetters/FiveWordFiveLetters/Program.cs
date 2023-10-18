@@ -8,16 +8,24 @@ GetWords getWords = new GetWords();
 
 List<string> alpha = getWords.Words("words_alpha.txt");
 List<string> alphaFiltered = new List<string>(alpha.FindAll(word => word.Length == 5));
+List<string> alphaFiltered1 = RemoveWordsWithDuplicateLetters(alphaFiltered.ToList());
+
 
 List<string> testData = getWords.Words("new_beta.txt");
-List<string> testDataFiltered = new List<string>(testData.FindAll(word => word.Length == 5).Distinct());
+List<string> testDataFiltered = new List<string>(testData.FindAll(word => word.Length == 5));
+List<string> testDataFiltered1 = new(RemoveWordsWithDuplicateLetters(testDataFiltered.ToList()));
+
+List<string> perfectData = getWords.Words("PerfectData.txt");
+List<string> perfectDataFiltered = new List<string>(perfectData.FindAll(word => word.Length == 5));
+List<string> perfectDataFiltered1 = new(RemoveWordsWithDuplicateLetters(perfectDataFiltered.ToList()));
 
 
 
 Console.WriteLine("Alpha words amount: {0}", alpha.Count);
 Console.WriteLine("Filtered alpha words amount: {0}", alphaFiltered.Count);
+Console.WriteLine("Filtered alpha words amount: {0}", alphaFiltered1.Count);
 Console.WriteLine("Test data amount: {0}", testData.Count);
-Console.WriteLine("Filtered test data amount: {0}", testDataFiltered.Count);
+Console.WriteLine("Filtered test data amount: {0}", testDataFiltered1.Count);
 
 List<List<string>> finalWords = new();
 int finalCombinations = finalWords.Count;
@@ -25,46 +33,56 @@ int finalCombinations = finalWords.Count;
 List<char> letterInChunkMustNotContain = new();
 List<string> wordsChunk = new();
 List<string> usedWords = new();
-foreach (string item in alphaFiltered)
-{
-    foreach (string word in alphaFiltered.Skip(usedWords.Count))
-    {
-        if (!usedWords.Contains(word))
-        {
-            //if (!word.StartsWith("a"))
-            //{
-            //    Console.WriteLine(word);
+int max = testDataFiltered1.Count;
 
-            //}
-            if (wordsChunk.Count() == 5)
+
+for (int i = 0; i < max; i++)
+{
+    foreach (string word in testDataFiltered1.Skip(i))
+    {
+        if (wordsChunk.Contains(word))
+        {
+            continue;
+        }
+        //if (usedWords.Contains(word))
+        //{
+        //    continue;
+        //}
+        if (wordsChunk.Count() == 5)
+        {
+            finalWords.Add(wordsChunk.ToList());
+            string result = "";
+            foreach (var item in wordsChunk)
             {
-                finalWords.Add(wordsChunk.ToList());
-                usedWords.Add(wordsChunk[0].ToString());
-                wordsChunk.Clear();
-                letterInChunkMustNotContain.Clear();
+                result = item + " ";
+            }
+            //usedWords.Add(wordsChunk[0].ToString());
+            wordsChunk.Clear();
+            letterInChunkMustNotContain.Clear();
+            continue;
+        }
+        int counter1 = 0;
+        foreach (char letter in word)
+        {
+            if (letterInChunkMustNotContain.Contains(letter))
+            {
                 break;
             }
-            int counter1 = 0;
-            foreach (char letter in word)
+            if (counter1 == word.Length - 1)
             {
-                //Console.WriteLine(!letterInChunkMustNotContain.Contains(letter));
-                if (!letterInChunkMustNotContain.Contains(letter))
+                wordsChunk.Add(word);
+                foreach (var letter1 in word)
                 {
-                    if (counter1 == word.Length - 1)
-                    {
-                        wordsChunk.Add(word);
-                        foreach (var letter1 in word)
-                        {
-                            letterInChunkMustNotContain.Add(letter1);
-                        }
-                    }
+                    letterInChunkMustNotContain.Add(letter1);
                 }
-
-                counter1++;
             }
-        }
 
+            counter1++;
+        }
     }
+    testDataFiltered1.Add(testDataFiltered1[i]);
+    wordsChunk.Clear();
+    letterInChunkMustNotContain.Clear();
 }
 
 foreach (List<string> words in finalWords)
@@ -78,3 +96,27 @@ foreach (List<string> words in finalWords)
     Console.WriteLine(result);
 }
 Console.WriteLine(finalWords.Count);
+
+static bool HasDuplicateLetters(string word)
+{
+    // Convert the word to lowercase for case-insensitive comparison
+    word = word.ToLower();
+    for (int i = 0; i < word.Length; i++)
+    {
+        char currentChar = word[i];
+        for (int j = i + 1; j < word.Length; j++)
+        {
+            if (currentChar == word[j])
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static List<string> RemoveWordsWithDuplicateLetters(List<string> wordList)
+{
+    wordList.RemoveAll(HasDuplicateLetters);
+    return wordList;
+}
