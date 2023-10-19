@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "FiveWordFiveLettersBLL/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/FiveWordFiveLettersBLL.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FiveWordFiveLettersBLL.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "FiveWordFiveLettersBLL/1.0.0": {
-      "type": "project",
-      "path": "../FiveWordFiveLettersBLL/FiveWordFiveLettersBLL.csproj",
-      "msbuildProject": "../FiveWordFiveLettersBLL/FiveWordFiveLettersBLL.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "FiveWordFiveLettersBLL >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\HFGF\\.nuget\\packages\\": {},
@@ -33,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
-      "projectName": "FiveWordFiveLetters",
-      "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
+      "projectUniqueName": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
+      "projectName": "FiveWordFiveLettersBLL",
+      "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
       "packagesPath": "C:\\Users\\HFGF\\.nuget\\packages\\",
-      "outputPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\obj\\",
+      "outputPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,11 +38,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj": {
-              "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -1,4 +1,4 @@
-﻿namespace FiveWordFiveLetters
+﻿namespace FiveWordFiveLettersBLL
 {
     public class GetWords
     {

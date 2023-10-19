@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FiveWordFiveLettersBLL\FiveWordFiveLettersBLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="new_beta.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
