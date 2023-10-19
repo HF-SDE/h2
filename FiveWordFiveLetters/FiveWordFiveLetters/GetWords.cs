@@ -1,39 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FiveWordFiveLetters
+﻿namespace FiveWordFiveLetters
 {
     public class GetWords
     {
-        public List<string> Words(string file)
+        public static List<string> Words(string file)
         {
             try
             {
                 String line;
-                List<string> list = new List<string>();
+                List<string> words = new();
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader(file);
+                StreamReader sr = new(file);
                 //Read the first line of text
-                line = sr.ReadLine();
+                line = sr.ReadLine()!;
                 //Continue to read until you reach end of file
                 while (line != null)
                 {
                     //write the line to console window
-                    list.Add(line);
+                    words.Add(line);
                     //Read the next line
-                    line = sr.ReadLine();
+                    line = sr.ReadLine()!;
                 }
                 //close the file
                 sr.Close();
-                return list;
+                return words;
             }
             catch
             {
                 return new List<string>();
             };
+        }
+        public static string[] GetWord(string file, int wordLength = 5)
+        {
+            List<string> words = new();
+            using (var reader = new StreamReader(file))
+            {
+
+                var word = "";
+                while ((word = reader.ReadLine()) != null)
+                {
+                    if (word.Length != wordLength) continue;
+                    if (word.Distinct().Count() != wordLength) continue;
+                    if (words.Where(x => string.Concat(x, word).Distinct().Count() == wordLength).Count() > 0) continue;
+                    words.Add(word);
+                }
+                Console.WriteLine("Antal ord: {0}", words.Count);
+            }
+            return words.ToArray();
         }
     }
 }

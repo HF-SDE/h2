@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FiveWordFiveLetters
+﻿namespace FiveWordFiveLetters
 {
     internal class @string
     {
-        public void value() {
+        public void value()
+        {
 
             GetWords getWords = new GetWords();
 
-            List<string> alpha = getWords.Words("words_alpha.txt");
+            List<string> alpha = GetWords.Words("words_alpha.txt");
             List<string> alphaFiltered = new List<string>(alpha.FindAll(word => word.Length == 5));
 
-            List<string> testData = getWords.Words("words_alpha.txt");
+            List<string> testData = GetWords.Words("words_alpha.txt");
             List<string> testDataFiltered = new List<string>(testData.FindAll(word => word.Length == 5).Distinct());
 
 
@@ -97,7 +92,7 @@ namespace FiveWordFiveLetters
                 Console.WriteLine(result);
             }
             Console.WriteLine(finalWords.Count);
-        
+
         }
     }
 }
