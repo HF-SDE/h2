@@ -1,0 +1,11 @@
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Release\net6.0\FiveWordFiveLettersBLL.deps.json
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Release\net6.0\FiveWordFiveLettersBLL.dll
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Release\net6.0\FiveWordFiveLettersBLL.pdb
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.AssemblyInfoInputs.cache
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.AssemblyInfo.cs
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.csproj.CoreCompileInputs.cache
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.dll
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\refint\FiveWordFiveLettersBLL.dll
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\FiveWordFiveLettersBLL.pdb
+C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Release\net6.0\ref\FiveWordFiveLettersBLL.dll

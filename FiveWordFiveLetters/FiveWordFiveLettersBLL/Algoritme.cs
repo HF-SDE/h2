@@ -36,9 +36,9 @@
             int wordCount = words.Length;
 
             Dictionary<int, string> dirWords = new();
-            ThreadLocal<int[]> bits = new (() => new int[wordCount]);
+            int[] bits = new int[wordCount];
 
-            Parallel.For(0, wordCount + 1, i =>
+            for (int i = 0; wordCount < i; i++)
             {
                 var bit = 0;
                 foreach (var ch in words[i])
@@ -46,10 +46,7 @@
                     bit |= 1 << (ch - 'a');
                 }
                 dirWords.TryAdd(bit, words[i]);
-                //Console.WriteLine("Key: "+bit+ " Value: " + words[i]);
-                int[] localArray = bits.Value;
-                localArray[i] = bit;
-            });
+            };
 
             int combinationBit2;
             int combinationBit3;
@@ -88,6 +85,26 @@
                 }
             }
             return combinations;
+        }
+        public void Binaryv2(ref int[] bitwords, int startIndex, int usedBits, int[] combination, ref List<string> combinations)
+        {
+            if (combination.Length == 5)
+            {
+                combinations.Add(string.Format("{0} {1} {2} {3} {4}", combination[0], combination[1], combination[2], combination[3], combination[4]));
+                return;
+            }
+
+            for (int i = startIndex; i < bitwords.Length; i++)
+            {
+                if ((usedBits & bitwords[i]) == 0)
+                {
+                    int[] newCombination = new int[combination.Length + 1];
+                    combination.CopyTo(newCombination, 0);
+                    newCombination[combination.Length] = bitwords[i];
+                    Binaryv2(ref bitwords, i + 1, usedBits | bitwords[i], newCombination, ref combinations);
+                }
+            }
+
         }
     }
 }

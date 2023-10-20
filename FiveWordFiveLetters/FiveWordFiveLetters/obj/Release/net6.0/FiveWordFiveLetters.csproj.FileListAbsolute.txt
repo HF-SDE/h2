@@ -16,3 +16,7 @@ C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\refint\FiveWord
 C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\FiveWordFiveLetters.pdb
 C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\FiveWordFiveLetters.genruntimeconfig.cache
 C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\ref\FiveWordFiveLetters.dll
+C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\FiveWordFiveLetters.csproj.AssemblyReference.cache
+C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\bin\Release\net6.0\FiveWordFiveLettersBLL.dll
+C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\bin\Release\net6.0\FiveWordFiveLettersBLL.pdb
+C:\h2\FiveWordFiveLetters\FiveWordFiveLetters\obj\Release\net6.0\FiveWordFiveLetters.csproj.CopyComplete
