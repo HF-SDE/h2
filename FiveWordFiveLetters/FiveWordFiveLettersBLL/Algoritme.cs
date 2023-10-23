@@ -32,9 +32,20 @@
                         combination.CopyTo(newCombination, 0);
                         newCombination[combination.Length] = bitwords[i];
                         int[] newWords = words.Skip(i + 1).ToArray();
-                        newWords = newWords.Where(x => (x & usedBits) == 0).ToArray();
+                        newWords = words.Where(x => (x & usedBits) == 0).ToArray();
                         MultiTheardBinary(newWords, usedBits | words[i], newCombination);
                     }
+                    //if ((usedBits & words[i]) == 0)
+                    //{
+                    //    List<int> newCombination = new(combination)
+                    //    {
+                    //        bitwords[i]
+                    //    };
+
+                    //    int[] newWords = words.Skip(i + 1).Where(x => (x & usedBits) == 0).ToArray();
+
+                    //    MultiTheardBinary(newWords, usedBits | words[i], newCombination.ToArray());
+                    //}
                 }
                 return;
             }
@@ -45,8 +56,8 @@
                 {
                     string result = $"{combination[0]} {combination[1]} {combination[2]} {combination[3]} {combination[4]}";
                     combinations.Add(result);
-                    //Console.WriteLine(result);
-                    //Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");
+                    Console.WriteLine(result);
+                    Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");
                     return;
                 }
 
@@ -61,6 +72,17 @@
                         newWords = newWords.Where(x => (x & usedBits) == 0).ToArray();
                         MultiTheardBinary(newWords, usedBits | words[i], newCombination);
                     }
+                    //if ((usedBits & words[i]) == 0)
+                    //{
+                    //    List<int> newCombination = new(combination)
+                    //    {
+                    //        bitwords[i]
+                    //    };
+
+                    //    int[] newWords = words.Skip(i + 1).Where(x => (x & usedBits) == 0).ToArray();
+
+                    //    MultiTheardBinary(newWords, usedBits | words[i], newCombination.ToArray());
+                    //}
                 }
                 return;
             }
