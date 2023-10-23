@@ -107,12 +107,14 @@
 
         }
 
-        public static void MultiTheardBinary(Dictionary<int, string> wordList)
+        public static int MultiTheardBinary(Dictionary<int, string> wordList)
         {
             int[] bitwords = new int[wordList.Count];
             wordList.Keys.CopyTo(bitwords, 0);
+
             List<string> combinations = new();
-            //var tasks = new List<Task>();
+
+            // Multi Thread
             var op = new ParallelOptions
             {
                 MaxDegreeOfParallelism = 1
@@ -122,7 +124,7 @@
                 FirstMultiTheardBinary(i, bitwords, 0, new int[1], combinations);
             });
 
-            Console.WriteLine($"[Binary] Amount of beta data: {combinations.Count}");
+            return combinations.Count;
 
 
             void FirstMultiTheardBinary(int startIndex, int[] words, int usedBits, int[] combination, List<string> combinations)
