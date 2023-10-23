@@ -11,10 +11,6 @@
             List<string> combinations = new();
 
             // Multi Thread
-            var op = new ParallelOptions
-            {
-                MaxDegreeOfParallelism = 1
-            };
             var t = Parallel.For(0, bitwords.Length, i =>
             {
                 FirstMultiTheardBinary(i, bitwords, 0, new int[1]);
@@ -54,14 +50,13 @@
                     return;
                 }
 
-
                 for (int i = 0; i < words.Length; i++)
                 {
                     if ((usedBits & words[i]) == 0)
                     {
                         int[] newCombination = new int[combination.Length + 1];
-                        combination.CopyTo(newCombination, 0);
                         newCombination[combination.Length] = bitwords[i];
+                        combination.CopyTo(newCombination, 0);
                         int[] newWords = words.Skip(i + 1).ToArray();
                         newWords = newWords.Where(x => (x & usedBits) == 0).ToArray();
                         MultiTheardBinary(newWords, usedBits | words[i], newCombination);
