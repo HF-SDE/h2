@@ -7,6 +7,6 @@ stopWatch.Start();
 //Dictionary<int, string> beta = GetWords.GetWordBinary("new_beta.txt");
 Dictionary<int, string> alpha = GetWords.GetWordBinary("words_alpha.txt");
 
-Console.WriteLine($"[Binary] Amount of beta data: {Algoritme.MultiTheardBinary(alpha)}");
+Console.WriteLine($"[Binary] Amount of beta data: {Algoritme.MultiTheardBinary(alpha, 5)}");
 stopWatch.Stop();
 Console.WriteLine($"Timed runned: {stopWatch.Elapsed}");
