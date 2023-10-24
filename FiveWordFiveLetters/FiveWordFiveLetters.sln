@@ -5,11 +5,13 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiveWordFiveLetters", "FiveWordFiveLetters\FiveWordFiveLetters.csproj", "{00B31944-4807-4BFE-A3EB-615D4F4140A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBenchMark", "TestBenchMark\TestBenchMark.csproj", "{7B992369-1E38-425F-B2D9-1D765D2BA49B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBenchMark", "TestBenchMark\TestBenchMark.csproj", "{7B992369-1E38-425F-B2D9-1D765D2BA49B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCollections", "TestCollections\TestCollections.csproj", "{B2AA0359-9491-44CE-84B8-9EB26B4E64D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCollections", "TestCollections\TestCollections.csproj", "{B2AA0359-9491-44CE-84B8-9EB26B4E64D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveWordFiveLettersBLL", "FiveWordFiveLettersBLL\FiveWordFiveLettersBLL.csproj", "{65FBCDB5-FCD0-4319-92D1-E0A0E00B8DE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiveWordFiveLettersBLL", "FiveWordFiveLettersBLL\FiveWordFiveLettersBLL.csproj", "{65FBCDB5-FCD0-4319-92D1-E0A0E00B8DE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveWordFiveLettersWPF", "FiveWordFiveLettersWPF\FiveWordFiveLettersWPF.csproj", "{19FE6E9A-FDA4-4713-8D22-06DC671BE4F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{65FBCDB5-FCD0-4319-92D1-E0A0E00B8DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65FBCDB5-FCD0-4319-92D1-E0A0E00B8DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65FBCDB5-FCD0-4319-92D1-E0A0E00B8DE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19FE6E9A-FDA4-4713-8D22-06DC671BE4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19FE6E9A-FDA4-4713-8D22-06DC671BE4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19FE6E9A-FDA4-4713-8D22-06DC671BE4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19FE6E9A-FDA4-4713-8D22-06DC671BE4F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
