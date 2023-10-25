@@ -225,3 +225,9 @@ AppPackages/
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+/FiveWordFiveLetters/.vs/FiveWordFiveLetters/v17/.suo
+/FiveWordFiveLetters/.vs/FiveWordFiveLetters/v17/.futdcache.v2
+/FiveWordFiveLetters/.vs/FiveWordFiveLetters/DesignTimeBuild/.dtbcache.v2
+/FiveWordFiveLetters/FiveWordFiveLettersBLL/bin/Release/net6.0/FiveWordFiveLettersBLL.dll
+/FiveWordFiveLetters/FiveWordFiveLettersBLL/bin/Release/net6.0/FiveWordFiveLettersBLL.pdb
+/FiveWordFiveLetters/FiveWordFiveLettersBLL/obj/Release/net6.0/ref/FiveWordFiveLettersBLL.dll

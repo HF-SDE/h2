@@ -56,8 +56,8 @@
                 {
                     string result = $"{combination[0]} {combination[1]} {combination[2]} {combination[3]} {combination[4]}";
                     combinations.Add(result);
-                    Console.WriteLine(result);
-                    Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");
+                    //Console.WriteLine(result);
+                    //Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");
                     return;
                 }
 
