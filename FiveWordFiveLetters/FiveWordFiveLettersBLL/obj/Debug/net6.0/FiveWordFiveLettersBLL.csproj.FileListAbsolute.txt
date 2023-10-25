@@ -9,3 +9,15 @@ C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLe
 C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\refint\FiveWordFiveLettersBLL.dll
 C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.pdb
 C:\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\ref\FiveWordFiveLettersBLL.dll
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Debug\net6.0\FiveWordFiveLettersBLL.deps.json
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Debug\net6.0\FiveWordFiveLettersBLL.dll
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\bin\Debug\net6.0\FiveWordFiveLettersBLL.pdb
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.csproj.AssemblyReference.cache
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.GeneratedMSBuildEditorConfig.editorconfig
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.AssemblyInfoInputs.cache
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.AssemblyInfo.cs
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.csproj.CoreCompileInputs.cache
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.dll
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\refint\FiveWordFiveLettersBLL.dll
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\FiveWordFiveLettersBLL.pdb
+A:\Udvikling\h2\FiveWordFiveLetters\FiveWordFiveLettersBLL\obj\Debug\net6.0\ref\FiveWordFiveLettersBLL.dll

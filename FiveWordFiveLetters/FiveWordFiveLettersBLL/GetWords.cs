@@ -2,6 +2,14 @@
 {
     public class GetWords
     {
+        /// <summary>
+        /// Reads a text file and retrieves words of a specific length with unique characters.
+        /// </summary>
+        /// <param name="file">The path to the text file to read.</param>
+        /// <param name="wordLength">The desired length of the words to retrieve (default is 5).</param>
+        /// <returns>
+        /// An array of words from the file that meet the specified criteria.
+        /// </returns>
         public static string[] GetWord(string file, int wordLength = 5)
         {
             List<string> words = new();
@@ -20,6 +28,14 @@
             }
             return words.ToArray();
         }
+        /// <summary>
+        /// Reads a text file and retrieves words of a specific length with unique characters, representing them as binary values.
+        /// </summary>
+        /// <param name="file">The path to the text file to read.</param>
+        /// <param name="wordLength">The desired length of the words to retrieve (default is 5).</param>
+        /// <returns>
+        /// A dictionary where keys are binary representations of words and values are the corresponding words.
+        /// </returns>
         public static Dictionary<int, string> GetWordBinary(string file, int wordLength = 5)
         {
             Dictionary<int, string> words = new();

@@ -7,15 +7,13 @@ namespace FiveWordFiveLettersBLL
     {
         int _progress = 0;
 
-        public List<string> MultiTheardBinary(Dictionary<int, string> wordList)
+        public List<string> MultiTheardBinary(Dictionary<int, string> wordList, int combinationLength = 5)
         {
-
-            Load load = new();
             int[] bitwords = new int[wordList.Count];
             wordList.Keys.CopyTo(bitwords, 0);
 
             List<string> combinations = new();
-            List<int> used = new();
+            List<int> usedWords = new();
 
             // Multi Thread
             var t = Parallel.For(0, bitwords.Length, i =>
@@ -25,7 +23,13 @@ namespace FiveWordFiveLettersBLL
 
             return combinations;
 
-
+            /// <summary>
+            /// Recursively generates binary combinations of words using a specified starting index.
+            /// </summary>
+            /// <param name="startIndex">The starting index for word combinations.</param>
+            /// <param name="words">An array of integers representing words as bit flags.</param>
+            /// <param name="usedBits">A bit flag representing the combination of used words.</param>
+            /// <param name="combination">An array to store the current combination of word indices.</param>
             void FirstMultiTheardBinary(int startIndex, int[] words, int usedBits, int[] combination)
             {
                 usedBits = bitwords[startIndex];
@@ -57,12 +61,22 @@ namespace FiveWordFiveLettersBLL
                 return;
             }
 
+            /// <summary>
+            /// Recursively generates binary combinations of words based on bit flags.
+            /// </summary>
+            /// <param name="words">An array of integers representing words as bit flags.</param>
+            /// <param name="usedBits">A bit flag representing the combination of used words.</param>
+            /// <param name="combination">An array to store the current combination of word indices.</param>
             void MultiTheardBinary(int[] words, int usedBits, int[] combination)
             {
-                if (combination.Length == 5)
+                if (combination.Length == combinationLength)
                 {
-                    OnPropertyChanged(combinations.Count == 537 ? combinations.Count  + 1 : combinations.Count);
-                    string result = $"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}";
+                    string result = "";
+                    OnPropertyChanged(_progress + 1);
+                    for (int i = 0; i < combinationLength; i++)
+                    {
+                        result += $"{wordList[combination[i]]}";
+                    }
                     combinations.Add(result);
                     //Console.WriteLine(result);
                     //Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");

@@ -4,56 +4,50 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection.Emit;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using Label = System.Windows.Controls.Label;
 
 namespace FiveWordFiveLettersWPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private BackgroundWorker woker = new();
-        private int lengthOfWords;
+        private int lengthOfWord = 5;
+        private int lengthOfWords = 5;
         private string filePath;
         private List<string> result;
         private int _currentProgress;
-        private Algoritme algoritme;
+        private int _maximumProgress = 100;
+        private readonly Algoritme algoritme;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<int> MaximumProgressEvent;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
-            algoritme = new Algoritme();
+            DataContext = this;
+            algoritme = new();
             algoritme.Progress += ProgressChanged;
+            MaximumProgressEvent += MaximumChanged;
             woker = new()
             {
                 WorkerSupportsCancellation = true
             };
-            woker.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
+            woker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork!);
+            woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted!);
         }
 
+        /// <summary>
+        /// Handles the click event of the "Open File" button, allowing the user to select a text file.
+        /// </summary>
         private void BtnOpenFile_OnClick(object sender, RoutedEventArgs e)
         {
+            ProgressChanged(null, 0);
             OpenFileDialog openFileDialog = new()
             {
                 Filter = "Text files (*.txt)|*.txt"
@@ -62,6 +56,9 @@ namespace FiveWordFiveLettersWPF
                 fileName.Text = openFileDialog.FileName;
         }
 
+        /// <summary>
+        /// Handles the click event of the "Load" button, initiating data loading and processing.
+        /// </summary>
         private void BtnLoad_OnClick(object sender, EventArgs e)
         {
             if (fileName.Text == "")
@@ -69,13 +66,19 @@ namespace FiveWordFiveLettersWPF
                 IsItNotSetted("");
                 return;
             }
-            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} Loading...";
-            lengthOfWords = int.Parse(amountOfMatch.Text);
-
+            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]}";
+            //_ = int.TryParse(amountOfMatch.Text, out lengthOfWord);
+            //_ = int.TryParse(amountOfMatchWords.Text, out lengthOfWords);
+            ProgressChanged(null, 0);
+            btnLoadData.IsEnabled = false;
             filePath = fileName.Text;
             woker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Handles the text changed event when the user enters or edits the file name in the input field.
+        /// Validates the input and updates UI elements accordingly.
+        /// </summary>
         private void FileName_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputText = fileName.Text;
@@ -95,7 +98,28 @@ namespace FiveWordFiveLettersWPF
             btnLoadData.IsEnabled = true;
         }
 
-        private void btnSaveFile_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Handles the text changed event when the user enters or edits the "amountOfMatch" field.
+        /// Attempts to parse the entered text as an integer, and sets the "lengthOfWord" variable accordingly.
+        /// </summary>
+        private void amountOfMatch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _ = int.TryParse(amountOfMatch.Text, out lengthOfWord);
+        }
+
+        /// <summary>
+        /// Handles the text changed event when the user enters or edits the "amountOfMatchWords" field.
+        /// Attempts to parse the entered text as an integer and sets the "lengthOfWords" variable accordingly.
+        /// </summary>
+        private void amountOfMatchWords_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _ = int.TryParse(amountOfMatchWords.Text, out lengthOfWords);
+        }
+
+        /// <summary>
+        /// Handles the click event of the "Save File" button, allowing the user to save data to a text file.
+        /// </summary>
+        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new()
             {
@@ -106,17 +130,35 @@ namespace FiveWordFiveLettersWPF
 
         }
 
+        /// <summary>
+        /// Validates text input to allow only numeric characters in a text box.
+        /// </summary>
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Updates the current progress value when a progress change event occurs.
+        /// </summary>
         private void ProgressChanged(object? sender, int e)
         {
             CurrentProgress = e;
         }
 
+        /// <summary>
+        /// Updates the maximum progress value when a maximum progress change event occurs.
+        /// </summary>
+        private void MaximumChanged(object? sender, int e)
+        {
+            MaximumProgress = e;
+        }
+
+        /// <summary>
+        /// Notifies subscribers that a property has changed.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has changed.</param>
         protected void NotifyPropertyChange(string propertyName)
         {
             if (propertyName != null)
@@ -125,34 +167,52 @@ namespace FiveWordFiveLettersWPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the current progress value, and notifies subscribers when it changes.
+        /// </summary>
         public int CurrentProgress
         {
             get { return _currentProgress; }
             set{ _currentProgress = value; NotifyPropertyChange("CurrentProgress"); }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Gets or sets the maximum progress value, and notifies subscribers when it changes.
+        /// </summary>
+        public int MaximumProgress
         {
-            // Do not access the form's BackgroundWorker reference directly.
-            // Instead, use the reference provided by the sender parameter.
-            Dictionary<int, string> file = GetWords.GetWordBinary(filePath, lengthOfWords);
-            //pbStatus.Maximum = file.Count;
-            // Start the time-consuming operation.
+            get { return _maximumProgress; }
+            set { _maximumProgress = value; NotifyPropertyChange("MaximumProgress"); }
+        }
 
-            e.Result = algoritme.MultiTheardBinary(file);
+        /// <summary>
+        /// Performs background work when the background worker is running.
+        /// This method loads word data from a file and performs a multi-threaded binary operation.
+        /// </summary>
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Dictionary<int, string> file = GetWords.GetWordBinary(filePath, lengthOfWord);
+            MaximumProgress = 538;
+            e.Result = algoritme.MultiTheardBinary(file, lengthOfWords);
 
         }
 
-        // This event handler demonstrates how to interpret
-        // the outcome of the asynchronous operation implemented
-        // in the DoWork event handler.
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// Handles the completion of background work when the background worker has finished its task.
+        /// This method updates UI elements, such as displaying the count of results, enabling buttons.
+        /// </summary>
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            result = e.Result as List<string>;
+            result = (List<string>)e.Result!;
             matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {result?.Count}";
             btnSaveFile.IsEnabled = true;
+            btnLoadData.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Displays an error message and visually indicates that a required action is not properly set.
+        /// </summary>
+        /// <param name="text">The error message to be displayed.</param>
         internal void IsItNotSetted(string text)
         {
             matched.Content = text;
@@ -162,13 +222,17 @@ namespace FiveWordFiveLettersWPF
             btnLoadData.IsEnabled = false;
         }
 
-
-
+        /// <summary>
+        /// Checks if a given file path is a valid path to a text file with a '.txt' extension.
+        /// </summary>
+        /// <param name="filePath">The file path to be validated.</param>
+        /// <returns>
+        ///   <c>true</c> if the file path is valid and represents a '.txt' text file; otherwise, <c>false</c>.
+        /// </returns>
         internal static bool IsValidFilePath(string filePath)
         {
             if (!string.IsNullOrWhiteSpace(filePath))
             {
-                // Use a regular expression to match .txt files
                 string pattern = @"^.+\.txt$";
                 return Regex.IsMatch(filePath, pattern, RegexOptions.IgnoreCase);
             }
