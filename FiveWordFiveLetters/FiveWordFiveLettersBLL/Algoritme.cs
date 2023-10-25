@@ -32,7 +32,7 @@
                         combination.CopyTo(newCombination, 0);
                         newCombination[combination.Length] = bitwords[i];
                         int[] newWords = words.Skip(i + 1).ToArray();
-                        newWords = words.Where(x => (x & usedBits) == 0).ToArray();
+                        newWords = newWords.Where(x => (x & usedBits) == 0).ToArray();
                         MultiTheardBinary(newWords, usedBits | words[i], newCombination);
                     }
                     //if ((usedBits & words[i]) == 0)
