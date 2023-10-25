@@ -3,7 +3,7 @@
     public class Algoritme
     {
 
-        public static int MultiTheardBinary(Dictionary<int, string> wordList)
+        public static List<string> MultiTheardBinary(Dictionary<int, string> wordList)
         {
             int[] bitwords = new int[wordList.Count];
             wordList.Keys.CopyTo(bitwords, 0);
@@ -16,7 +16,7 @@
                 FirstMultiTheardBinary(i, bitwords, 0, new int[1]);
             });
 
-            return combinations.Count;
+            return combinations;
 
 
             void FirstMultiTheardBinary(int startIndex, int[] words, int usedBits, int[] combination)
@@ -54,7 +54,7 @@
             {
                 if (combination.Length == 5)
                 {
-                    string result = $"{combination[0]} {combination[1]} {combination[2]} {combination[3]} {combination[4]}";
+                    string result = $"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}";
                     combinations.Add(result);
                     //Console.WriteLine(result);
                     //Console.WriteLine($"{wordList[combination[0]]} {wordList[combination[1]]} {wordList[combination[2]]} {wordList[combination[3]]} {wordList[combination[4]]}");
