@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,22 +27,29 @@ namespace FiveWordFiveLettersWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private BackgroundWorker backgroundWorker1 = new();
-        int lengthOfWords;
-        string filePath;
-        List<string> result;
+        private BackgroundWorker woker = new();
+        private int lengthOfWords;
+        private string filePath;
+        private List<string> result;
+        private int _currentProgress;
+        private Algoritme algoritme;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public MainWindow()
         {
             InitializeComponent();
-            backgroundWorker1 = new()
+            this.DataContext = this;
+            algoritme = new Algoritme();
+            algoritme.Progress += ProgressChanged;
+            woker = new()
             {
                 WorkerSupportsCancellation = true
             };
-            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
-
+            woker.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
+            woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
         }
 
         private void BtnOpenFile_OnClick(object sender, RoutedEventArgs e)
@@ -61,10 +69,11 @@ namespace FiveWordFiveLettersWPF
                 IsItNotSetted("");
                 return;
             }
-            matched.Content = "Loading...";
+            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} Loading...";
             lengthOfWords = int.Parse(amountOfMatch.Text);
+
             filePath = fileName.Text;
-            backgroundWorker1.RunWorkerAsync();
+            woker.RunWorkerAsync();
         }
 
         private void FileName_TextChanged(object sender, TextChangedEventArgs e)
@@ -81,9 +90,20 @@ namespace FiveWordFiveLettersWPF
                 return;
             }
             fileName.ClearValue(TextBox.BorderBrushProperty);
-            matched.Content = "";
+            matched.Content = matched.Content.ToString()?.Split(" ")[0];
             matched.ClearValue(Label.ForegroundProperty);
             btnLoadData.IsEnabled = true;
+        }
+
+        private void btnSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "Text file (*.txt)|*.txt"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllLines(saveFileDialog.FileName, result);
+
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -92,14 +112,34 @@ namespace FiveWordFiveLettersWPF
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void ProgressChanged(object? sender, int e)
+        {
+            CurrentProgress = e;
+        }
+
+        protected void NotifyPropertyChange(string propertyName)
+        {
+            if (propertyName != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public int CurrentProgress
+        {
+            get { return _currentProgress; }
+            set{ _currentProgress = value; NotifyPropertyChange("CurrentProgress"); }
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             // Do not access the form's BackgroundWorker reference directly.
             // Instead, use the reference provided by the sender parameter.
             Dictionary<int, string> file = GetWords.GetWordBinary(filePath, lengthOfWords);
-
+            //pbStatus.Maximum = file.Count;
             // Start the time-consuming operation.
-            e.Result = Algoritme.MultiTheardBinary(file);
+
+            e.Result = algoritme.MultiTheardBinary(file);
 
         }
 
@@ -109,7 +149,7 @@ namespace FiveWordFiveLettersWPF
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             result = e.Result as List<string>;
-            matched.Content = result?.Count;
+            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {result?.Count}";
             btnSaveFile.IsEnabled = true;
         }
 
@@ -133,17 +173,6 @@ namespace FiveWordFiveLettersWPF
                 return Regex.IsMatch(filePath, pattern, RegexOptions.IgnoreCase);
             }
             return false;
-        }
-
-        private void btnSaveFile_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new()
-            {
-                Filter = "Text file (*.txt)|*.txt"
-            };
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllLines(saveFileDialog.FileName, result);
-
         }
     }
 }

@@ -27,8 +27,9 @@
         <Button Name="btnLoadData" IsEnabled="False" Margin="2" Grid.Row="2" Grid.ColumnSpan="2" Background="Gray" BorderBrush="Black" BorderThickness="1" Click="BtnLoad_OnClick" Width="Auto" Height="Auto">
             Load
         </Button>
-        <Label Grid.Row="3">Match:</Label>
-        <Label Grid.Row="3" Grid.Column="2" Name="matched" BorderThickness="1" BorderBrush="Black"/>
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Name="btnSaveFile" Click="btnSaveFile_Click" Margin="0,0,3,0" IsEnabled="False">Save file</Button>
+        <Label Grid.Row="3" Name="matched" Content="Match:" />
+        <ProgressBar Grid.Row="3" Grid.Column="2" Minimum="0" Maximum="538" Name="pbStatus" Value="{Binding CurrentProgress}"/>
+        <Button Grid.Row="4" Grid.ColumnSpan="1" Name="btnSaveFile" Click="btnSaveFile_Click" Margin="0,0,3,0" IsEnabled="False">Save file</Button>
+        <Label Grid.Row="4" Grid.Column="2" Name="test" Margin="0,0,3,0" Content="{Binding CurrentProgress}" />
     </Grid>
 </Window>
