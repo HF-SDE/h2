@@ -31,6 +31,7 @@ namespace FiveWordFiveLettersWPF
         private BackgroundWorker backgroundWorker1 = new();
         int lengthOfWords;
         string filePath;
+        List<string> result;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,8 +46,10 @@ namespace FiveWordFiveLettersWPF
 
         private void BtnOpenFile_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+            OpenFileDialog openFileDialog = new()
+            {
+                Filter = "Text files (*.txt)|*.txt"
+            };
             if (openFileDialog.ShowDialog() == true)
                 fileName.Text = openFileDialog.FileName;
         }
@@ -59,7 +62,7 @@ namespace FiveWordFiveLettersWPF
                 return;
             }
             matched.Content = "Loading...";
-            lengthOfWords =  int.Parse(amountOfMatch.Text);
+            lengthOfWords = int.Parse(amountOfMatch.Text);
             filePath = fileName.Text;
             backgroundWorker1.RunWorkerAsync();
         }
@@ -80,26 +83,14 @@ namespace FiveWordFiveLettersWPF
             fileName.ClearValue(TextBox.BorderBrushProperty);
             matched.Content = "";
             matched.ClearValue(Label.ForegroundProperty);
-            fileName.BorderThickness = new Thickness(0);
             btnLoadData.IsEnabled = true;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
-        //private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    Dictionary<int, string> file = GetWords.GetWordBinary(fileName.Text, int.Parse(amountOfMatch.Text));
-        //    e.Result = Algoritme.MultiTheardBinary(file);
-        //}
-
-        //private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    matched.Content = e.Result;
-        //}
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -117,24 +108,9 @@ namespace FiveWordFiveLettersWPF
         // in the DoWork event handler.
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            matched.Content = e.Result;
-            //if (e.Cancelled)
-            //{
-            //    // The user canceled the operation.
-            //    MessageBox.Show("Operation was canceled");
-            //}
-            //else if (e.Error != null)
-            //{
-            //    // There was an error during the operation.
-            //    string msg = String.Format("An error occurred: {0}", e.Error.Message);
-            //    MessageBox.Show(msg);
-            //}
-            //else
-            //{
-            //    // The operation completed normally.
-            //    string msg = String.Format("Result = {0}", e.Result);
-            //    MessageBox.Show(msg);
-            //}
+            result = e.Result as List<string>;
+            matched.Content = result?.Count;
+            btnSaveFile.IsEnabled = true;
         }
 
         internal void IsItNotSetted(string text)
@@ -157,6 +133,17 @@ namespace FiveWordFiveLettersWPF
                 return Regex.IsMatch(filePath, pattern, RegexOptions.IgnoreCase);
             }
             return false;
+        }
+
+        private void btnSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "Text file (*.txt)|*.txt"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllLines(saveFileDialog.FileName, result);
+
         }
     }
 }

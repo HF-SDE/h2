@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveWordFiveLettersWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Awesome Algoritme" Height="450" Width="800">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -22,12 +22,13 @@
         <TextBox Name="amountOfMatch" Grid.Column="2" Text="5" VerticalContentAlignment="Center" PreviewTextInput="NumberValidationTextBox" />
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="1">
             <Button Name="btnOpenFile" Click="BtnOpenFile_OnClick" Margin="0,0,3,0">Open file</Button>
-            <TextBox Name="fileName" VerticalContentAlignment="Center" TextChanged="FileName_TextChanged"/>
+            <TextBox Name="fileName" VerticalContentAlignment="Center" TextChanged="FileName_TextChanged" BorderBrush="Black"/>
         </DockPanel>
         <Button Name="btnLoadData" IsEnabled="False" Margin="2" Grid.Row="2" Grid.ColumnSpan="2" Background="Gray" BorderBrush="Black" BorderThickness="1" Click="BtnLoad_OnClick" Width="Auto" Height="Auto">
             Load
         </Button>
         <Label Grid.Row="3">Match:</Label>
-        <Label Grid.Row="3" Grid.Column="2" Name="matched" />
+        <Label Grid.Row="3" Grid.Column="2" Name="matched" BorderThickness="1" BorderBrush="Black"/>
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Name="btnSaveFile" Click="btnSaveFile_Click" Margin="0,0,3,0" IsEnabled="False">Save file</Button>
     </Grid>
 </Window>
