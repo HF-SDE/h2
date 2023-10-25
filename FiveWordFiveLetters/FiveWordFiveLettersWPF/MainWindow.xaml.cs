@@ -52,8 +52,7 @@ namespace FiveWordFiveLettersWPF
             {
                 Filter = "Text files (*.txt)|*.txt"
             };
-            if (openFileDialog.ShowDialog() == true)
-                fileName.Text = openFileDialog.FileName;
+            if (openFileDialog.ShowDialog() == true) fileName.Text = openFileDialog.FileName;
         }
 
         /// <summary>
@@ -161,10 +160,7 @@ namespace FiveWordFiveLettersWPF
         /// <param name="propertyName">The name of the property that has changed.</param>
         protected void NotifyPropertyChange(string propertyName)
         {
-            if (propertyName != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            if (propertyName != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -173,7 +169,7 @@ namespace FiveWordFiveLettersWPF
         public int CurrentProgress
         {
             get { return _currentProgress; }
-            set{ _currentProgress = value; NotifyPropertyChange("CurrentProgress"); }
+            set { _currentProgress = value; NotifyPropertyChange(nameof(CurrentProgress)); }
         }
 
         /// <summary>
@@ -182,7 +178,7 @@ namespace FiveWordFiveLettersWPF
         public int MaximumProgress
         {
             get { return _maximumProgress; }
-            set { _maximumProgress = value; NotifyPropertyChange("MaximumProgress"); }
+            set { _maximumProgress = value; NotifyPropertyChange(nameof(MaximumProgress)); }
         }
 
         /// <summary>
@@ -238,5 +234,26 @@ namespace FiveWordFiveLettersWPF
             }
             return false;
         }
-    }
+
+        /// <summary>
+        /// Handles the event when the "Dark Mode" option is checked.
+        /// This method updates the application settings to set the color mode to "Dark" and saves the settings.
+        /// </summary>
+        private void DarkMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ColorMode = "Dark";
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Handles the event when the "Light Mode" option is checked.
+        /// This method updates the application settings to set the color mode to "Light" and saves the settings.
+        /// </summary>
+        private void LightMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ColorMode = "Light";
+            Properties.Settings.Default.Save();
+        }
+    };
+
 }

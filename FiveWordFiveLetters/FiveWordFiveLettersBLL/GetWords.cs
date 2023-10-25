@@ -28,6 +28,7 @@
             }
             return words.ToArray();
         }
+
         /// <summary>
         /// Reads a text file and retrieves words of a specific length with unique characters, representing them as binary values.
         /// </summary>

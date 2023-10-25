@@ -75,7 +75,7 @@ namespace FiveWordFiveLettersBLL
                     OnPropertyChanged(_progress + 1);
                     for (int i = 0; i < combinationLength; i++)
                     {
-                        result += $"{wordList[combination[i]]}";
+                        result += $"{wordList[combination[i]]} ";
                     }
                     combinations.Add(result);
                     //Console.WriteLine(result);
@@ -109,7 +109,16 @@ namespace FiveWordFiveLettersBLL
                 return;
             }
         }
-        public event EventHandler<int> Progress;
+
+        /// <summary>
+        /// Event raised to notify subscribers about progress changes.
+        /// </summary>
+        public event EventHandler<int>? Progress;
+
+        /// <summary>
+        /// Raises the 'Progress' event to notify subscribers and updates the internal progress index.
+        /// </summary>
+        /// <param name="index">The new progress index to be set.</param>
         protected virtual void OnPropertyChanged(int index)
         {
             Progress?.Invoke(this, index);
