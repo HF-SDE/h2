@@ -21,19 +21,19 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.ColumnSpan="2">
             <Label Content="Length of word:" Margin="0,0,5,0"/>
-            <TextBox Name="amountOfMatch" Text="5" VerticalContentAlignment="Center" PreviewTextInput="NumberValidationTextBox" TextChanged="amountOfMatch_TextChanged"/>
+            <TextBox Name="amountOfMatch" Text="5" VerticalContentAlignment="Center" PreviewTextInput="NumberValidationTextBox" TextChanged="amountOfMatch_TextChanged" InputScope="Number"/>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
             <Label Content="Length of words:"/>
-            <TextBox Name="amountOfMatchWords" Text="5" VerticalContentAlignment="Center" PreviewTextInput="NumberValidationTextBox" TextChanged="amountOfMatchWords_TextChanged"/>
+            <TextBox Name="amountOfMatchWords" Text="5" VerticalContentAlignment="Center" PreviewTextInput="NumberValidationTextBox" TextChanged="amountOfMatchWords_TextChanged" InputScope="Number"/>
         </DockPanel>
-        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="1">
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="1" AllowDrop="True" Drop="fileName_Drop">
             <Button Name="btnOpenFile" Click="BtnOpenFile_OnClick" Margin="0,0,3,0" Content="Open file"/>
-            <TextBox Name="fileName" VerticalContentAlignment="Center" TextChanged="FileName_TextChanged"/>
+            <TextBox Name="fileName" VerticalContentAlignment="Center" TextChanged="FileName_TextChanged" InputScope="FullFilePath"/>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="2">
             <Label x:Name="matched" Content="Match: ***" />
-            <ProgressBar Grid.Column="2" Minimum="0" Maximum="{Binding MaximumProgress}" Name="pbStatus" Value="{Binding CurrentProgress}"/>
+            <ProgressBar Grid.Column="2" Minimum="0" Maximum="{Binding MaximumProgress}" x:Name="pbStatus" Value="{Binding CurrentProgress}"/>
         </DockPanel>
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="2">
             <UniformGrid Rows="1" Columns="2">

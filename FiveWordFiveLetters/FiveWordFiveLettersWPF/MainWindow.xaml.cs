@@ -1,4 +1,5 @@
 ﻿using FiveWordFiveLettersBLL;
+using FiveWordFiveLettersWPF.libs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,24 +14,22 @@ using Label = System.Windows.Controls.Label;
 
 namespace FiveWordFiveLettersWPF
 {
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         private BackgroundWorker _woker = new();
+        private ViewModel _viewModel = new();
         private int _lengthOfWord = 5;
         private int _lengthOfWords = 5;
-        private string _filePath;
-        private List<string> _result;
-        private int _currentProgress;
-        private int _maximumProgress = 100;
+        private string? _filePath;
+        private List<string>? _result;
         private readonly Algoritme _algoritme;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<int> MaximumProgressEvent;
+        public event EventHandler<int>? MaximumProgressEvent;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = new ViewModel();
             _algoritme = new();
             _algoritme.Progress += ProgressChanged;
             MaximumProgressEvent += MaximumChanged;
@@ -53,6 +52,15 @@ namespace FiveWordFiveLettersWPF
                 Filter = "Text files (*.txt)|*.txt"
             };
             if (openFileDialog.ShowDialog() == true) fileName.Text = openFileDialog.FileName;
+        }
+
+        private void fileName_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                fileName.Text = files[0];
+            }
         }
 
         /// <summary>
@@ -142,7 +150,7 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void ProgressChanged(object? sender, int e)
         {
-            CurrentProgress = e;
+            _viewModel.CurrentProgress = e;
         }
 
         /// <summary>
@@ -150,34 +158,7 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void MaximumChanged(object? sender, int e)
         {
-            MaximumProgress = e;
-        }
-
-        /// <summary>
-        /// Notifies subscribers that a property has changed.
-        /// </summary>
-        /// <param name="propertyName">The name of the property that has changed.</param>
-        protected void NotifyPropertyChange(string propertyName)
-        {
-            if (propertyName != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Gets or sets the current progress value, and notifies subscribers when it changes.
-        /// </summary>
-        public int CurrentProgress
-        {
-            get { return _currentProgress; }
-            set { _currentProgress = value; NotifyPropertyChange(nameof(CurrentProgress)); }
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum progress value, and notifies subscribers when it changes.
-        /// </summary>
-        public int MaximumProgress
-        {
-            get { return _maximumProgress; }
-            set { _maximumProgress = value; NotifyPropertyChange(nameof(MaximumProgress)); }
+            _viewModel.MaximumProgress = e;
         }
 
         /// <summary>
@@ -186,8 +167,8 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath, _lengthOfWord);
-            MaximumProgress = 100;
+            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath!, _lengthOfWord);
+            _viewModel.MaximumProgress = 100;
             e.Result = _algoritme.MultiTheardBinary(file, _lengthOfWords);
 
         }
