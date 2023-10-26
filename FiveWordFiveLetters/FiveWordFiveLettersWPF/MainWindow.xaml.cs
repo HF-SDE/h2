@@ -16,13 +16,14 @@ namespace FiveWordFiveLettersWPF
 {
     public partial class MainWindow : Window
     {
-        private BackgroundWorker _woker = new();
-        private ViewModel _viewModel = new();
+        private readonly BackgroundWorker _worker = new();
+        private readonly ViewModel _viewModel = new();
+        private readonly Utils _utils = new();
         private int _lengthOfWord = 5;
-        private int _lengthOfWords = 5;
+        private int _lengthOfWordsCombination = 5;
         private string? _filePath;
         private List<string>? _result;
-        private readonly Algoritme _algoritme;
+        private readonly Algoritme _algoritme = new();
 
         public event EventHandler<int>? MaximumProgressEvent;
 
@@ -30,15 +31,14 @@ namespace FiveWordFiveLettersWPF
         {
             InitializeComponent();
             DataContext = new ViewModel();
-            _algoritme = new();
             _algoritme.Progress += ProgressChanged;
             MaximumProgressEvent += MaximumChanged;
-            _woker = new()
+            _worker = new()
             {
                 WorkerSupportsCancellation = true
             };
-            _woker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork!);
-            _woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted!);
+            _worker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork!);
+            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted!);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace FiveWordFiveLettersWPF
             if (openFileDialog.ShowDialog() == true) fileName.Text = openFileDialog.FileName;
         }
 
-        private void fileName_Drop(object sender, DragEventArgs e)
+        private void FileName_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -78,7 +78,7 @@ namespace FiveWordFiveLettersWPF
             btnLoadData.IsEnabled = false;
             _filePath = fileName.Text;
             pbStatus.IsIndeterminate = true;
-            _woker.RunWorkerAsync();
+            _worker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace FiveWordFiveLettersWPF
                 IsItNotSetted("Select a file first");
                 return;
             }
-            if (!IsValidFilePath(inputText) && !File.Exists(inputText))
+            if (!_utils.IsValidFilePath(inputText) && !File.Exists(inputText))
             {
                 IsItNotSetted("Invalid .txt file or does not exist.");
                 return;
@@ -102,119 +102,6 @@ namespace FiveWordFiveLettersWPF
             matched.Content = matched.Content.ToString()?.Split(" ")[0];
             matched.ClearValue(Label.ForegroundProperty);
             btnLoadData.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// Handles the text changed event when the user enters or edits the "amountOfMatch" field.
-        /// Attempts to parse the entered text as an integer, and sets the "lengthOfWord" variable accordingly.
-        /// </summary>
-        private void amountOfMatch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            _ = int.TryParse(amountOfMatch.Text, out _lengthOfWord);
-        }
-
-        /// <summary>
-        /// Handles the text changed event when the user enters or edits the "amountOfMatchWords" field.
-        /// Attempts to parse the entered text as an integer and sets the "lengthOfWords" variable accordingly.
-        /// </summary>
-        private void amountOfMatchWords_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            _ = int.TryParse(amountOfMatchWords.Text, out _lengthOfWords);
-        }
-
-        /// <summary>
-        /// Handles the click event of the "Save File" button, allowing the user to save data to a text file.
-        /// </summary>
-        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new()
-            {
-                Filter = "Text file (*.txt)|*.txt"
-            };
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllLines(saveFileDialog.FileName, _result);
-
-        }
-
-        /// <summary>
-        /// Validates text input to allow only numeric characters in a text box.
-        /// </summary>
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
-        /// <summary>
-        /// Updates the current progress value when a progress change event occurs.
-        /// </summary>
-        private void ProgressChanged(object? sender, int e)
-        {
-            _viewModel.CurrentProgress = e;
-        }
-
-        /// <summary>
-        /// Updates the maximum progress value when a maximum progress change event occurs.
-        /// </summary>
-        private void MaximumChanged(object? sender, int e)
-        {
-            _viewModel.MaximumProgress = e;
-        }
-
-        /// <summary>
-        /// Performs background work when the background worker is running.
-        /// This method loads word data from a file and performs a multi-threaded binary operation.
-        /// </summary>
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath!, _lengthOfWord);
-            _viewModel.MaximumProgress = 100;
-            e.Result = _algoritme.MultiTheardBinary(file, _lengthOfWords);
-
-        }
-
-        /// <summary>
-        /// Handles the completion of background work when the background worker has finished its task.
-        /// This method updates UI elements, such as displaying the count of results, enabling buttons.
-        /// </summary>
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            _result = (List<string>)e.Result!;
-            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {_result?.Count}";
-            btnSaveFile.IsEnabled = true;
-            btnLoadData.IsEnabled = true;
-            pbStatus.IsIndeterminate = false;
-            pbStatus.Value = 100;
-        }
-
-        /// <summary>
-        /// Displays an error message and visually indicates that a required action is not properly set.
-        /// </summary>
-        /// <param name="text">The error message to be displayed.</param>
-        internal void IsItNotSetted(string text)
-        {
-            matched.Content = text;
-            matched.Foreground = Brushes.Red;
-            fileName.BorderBrush = Brushes.Red;
-            fileName.BorderThickness = new Thickness(2);
-            btnLoadData.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// Checks if a given file path is a valid path to a text file with a '.txt' extension.
-        /// </summary>
-        /// <param name="filePath">The file path to be validated.</param>
-        /// <returns>
-        ///   <c>true</c> if the file path is valid and represents a '.txt' text file; otherwise, <c>false</c>.
-        /// </returns>
-        internal static bool IsValidFilePath(string filePath)
-        {
-            if (!string.IsNullOrWhiteSpace(filePath))
-            {
-                string pattern = @"^.+\.txt$";
-                return Regex.IsMatch(filePath, pattern, RegexOptions.IgnoreCase);
-            }
-            return false;
         }
 
         /// <summary>
@@ -235,6 +122,102 @@ namespace FiveWordFiveLettersWPF
         {
             Properties.Settings.Default.ColorMode = "Light";
             Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Handles the text changed event when the user enters or edits the "amountOfMatch" field.
+        /// Attempts to parse the entered text as an integer, and sets the "lengthOfWord" variable accordingly.
+        /// </summary>
+        private void LengthOfLetters_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _ = int.TryParse(amountOfMatch.Text, out _lengthOfWord);
+        }
+
+        /// <summary>
+        /// Handles the text changed event when the user enters or edits the "amountOfMatchWords" field.
+        /// Attempts to parse the entered text as an integer and sets the "lengthOfWords" variable accordingly.
+        /// </summary>
+        private void LengthOfMatchWords_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _ = int.TryParse(amountOfMatchWords.Text, out _lengthOfWordsCombination);
+        }
+
+        /// <summary>
+        /// Handles the click event of the "Save File" button, allowing the user to save data to a text file.
+        /// </summary>
+        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "Text file (*.txt)|*.txt"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllLines(saveFileDialog.FileName, _result!);
+
+        }
+
+        /// <summary>
+        /// Displays an error message and visually indicates that a required action is not properly set.
+        /// </summary>
+        /// <param name="text">The error message to be displayed.</param>
+        internal void IsItNotSetted(string text)
+        {
+            matched.Content = text;
+            matched.Foreground = Brushes.Red;
+            fileName.BorderBrush = Brushes.Red;
+            fileName.BorderThickness = new Thickness(2);
+            btnLoadData.IsEnabled = false;
+        }
+
+        /// <summary>
+        /// Validates text input to allow only numeric characters in a text box.
+        /// </summary>
+        internal void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        /// <summary>
+        /// Performs background work when the background worker is running.
+        /// This method loads word data from a file and performs a multi-threaded binary operation.
+        /// </summary>
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath!, _lengthOfWord);
+            _viewModel.MaximumProgress = 100;
+            e.Result = _algoritme.MultiTheardBinary(file, _lengthOfWordsCombination);
+
+        }
+
+        /// <summary>
+        /// Handles the completion of background work when the background worker has finished its task.
+        /// This method updates UI elements, such as displaying the count of results, enabling buttons.
+        /// </summary>
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            _result = (List<string>)e.Result!;
+            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {_result?.Count}";
+            btnSaveFile.IsEnabled = true;
+            btnLoadData.IsEnabled = true;
+            pbStatus.IsIndeterminate = false;
+            pbStatus.Value = 100;
+        }
+
+        /// <summary>
+        /// Updates the current progress value when a progress change event occurs.
+        /// </summary>
+        private void ProgressChanged(object? sender, int e)
+        {
+            _viewModel.CurrentProgress = e;
+        }
+
+        /// <summary>
+        /// Updates the maximum progress value when a maximum progress change event occurs.
+        /// </summary>
+        private void MaximumChanged(object? sender, int e)
+        {
+            _viewModel.MaximumProgress = e;
         }
     };
 

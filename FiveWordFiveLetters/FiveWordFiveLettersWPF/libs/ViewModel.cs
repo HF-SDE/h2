@@ -39,7 +39,7 @@ namespace FiveWordFiveLettersWPF.libs
                 if (_currentProgress != value)
                 {
                     _currentProgress = value;
-                    OnPropertyChanged(nameof(CurrentProgress));
+                    NotifyPropertyChange(nameof(CurrentProgress));
                 }
             }
         }
