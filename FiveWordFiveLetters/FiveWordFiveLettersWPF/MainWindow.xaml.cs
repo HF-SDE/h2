@@ -15,14 +15,14 @@ namespace FiveWordFiveLettersWPF
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private BackgroundWorker woker = new();
-        private int lengthOfWord = 5;
-        private int lengthOfWords = 5;
-        private string filePath;
-        private List<string> result;
+        private BackgroundWorker _woker = new();
+        private int _lengthOfWord = 5;
+        private int _lengthOfWords = 5;
+        private string _filePath;
+        private List<string> _result;
         private int _currentProgress;
         private int _maximumProgress = 100;
-        private readonly Algoritme algoritme;
+        private readonly Algoritme _algoritme;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<int> MaximumProgressEvent;
@@ -31,15 +31,15 @@ namespace FiveWordFiveLettersWPF
         {
             InitializeComponent();
             DataContext = this;
-            algoritme = new();
-            algoritme.Progress += ProgressChanged;
+            _algoritme = new();
+            _algoritme.Progress += ProgressChanged;
             MaximumProgressEvent += MaximumChanged;
-            woker = new()
+            _woker = new()
             {
                 WorkerSupportsCancellation = true
             };
-            woker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork!);
-            woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted!);
+            _woker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork!);
+            _woker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted!);
         }
 
         /// <summary>
@@ -66,12 +66,11 @@ namespace FiveWordFiveLettersWPF
                 return;
             }
             matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]}";
-            //_ = int.TryParse(amountOfMatch.Text, out lengthOfWord);
-            //_ = int.TryParse(amountOfMatchWords.Text, out lengthOfWords);
-            ProgressChanged(null, 0);
+            ProgressChanged(null, 10);
             btnLoadData.IsEnabled = false;
-            filePath = fileName.Text;
-            woker.RunWorkerAsync();
+            _filePath = fileName.Text;
+            pbStatus.IsIndeterminate = true;
+            _woker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -103,7 +102,7 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void amountOfMatch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _ = int.TryParse(amountOfMatch.Text, out lengthOfWord);
+            _ = int.TryParse(amountOfMatch.Text, out _lengthOfWord);
         }
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void amountOfMatchWords_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _ = int.TryParse(amountOfMatchWords.Text, out lengthOfWords);
+            _ = int.TryParse(amountOfMatchWords.Text, out _lengthOfWords);
         }
 
         /// <summary>
@@ -125,7 +124,7 @@ namespace FiveWordFiveLettersWPF
                 Filter = "Text file (*.txt)|*.txt"
             };
             if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllLines(saveFileDialog.FileName, result);
+                File.WriteAllLines(saveFileDialog.FileName, _result);
 
         }
 
@@ -187,9 +186,9 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Dictionary<int, string> file = GetWords.GetWordBinary(filePath, lengthOfWord);
-            MaximumProgress = 538;
-            e.Result = algoritme.MultiTheardBinary(file, lengthOfWords);
+            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath, _lengthOfWord);
+            MaximumProgress = 100;
+            e.Result = _algoritme.MultiTheardBinary(file, _lengthOfWords);
 
         }
 
@@ -199,10 +198,12 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            result = (List<string>)e.Result!;
-            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {result?.Count}";
+            _result = (List<string>)e.Result!;
+            matched.Content = $"{matched.Content.ToString()?.Split(" ")[0]} {_result?.Count}";
             btnSaveFile.IsEnabled = true;
             btnLoadData.IsEnabled = true;
+            pbStatus.IsIndeterminate = false;
+            pbStatus.Value = 100;
         }
 
         /// <summary>

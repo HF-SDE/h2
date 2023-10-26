@@ -9,11 +9,10 @@ namespace FiveWordFiveLettersBLL
 
         public List<string> MultiTheardBinary(Dictionary<int, string> wordList, int combinationLength = 5)
         {
+            List<string> combinations = new();
+
             int[] bitwords = new int[wordList.Count];
             wordList.Keys.CopyTo(bitwords, 0);
-
-            List<string> combinations = new();
-            List<int> usedWords = new();
 
             // Multi Thread
             var t = Parallel.For(0, bitwords.Length, i =>
@@ -34,12 +33,12 @@ namespace FiveWordFiveLettersBLL
             {
                 usedBits = bitwords[startIndex];
                 combination[0] = usedBits;
+                int[] newCombination = new int[combination.Length + 1];
 
                 for (int i = startIndex; i < words.Length; i++)
                 {
                     if ((usedBits & words[i]) == 0)
                     {
-                        int[] newCombination = new int[combination.Length + 1];
                         combination.CopyTo(newCombination, 0);
                         newCombination[combination.Length] = bitwords[i];
                         int[] newWords = words.Skip(i + 1).ToArray();
@@ -69,6 +68,8 @@ namespace FiveWordFiveLettersBLL
             /// <param name="combination">An array to store the current combination of word indices.</param>
             void MultiTheardBinary(int[] words, int usedBits, int[] combination)
             {
+                int[] newCombination = new int[combination.Length + 1];
+
                 if (combination.Length == combinationLength)
                 {
                     string result = "";
@@ -87,7 +88,6 @@ namespace FiveWordFiveLettersBLL
                 {
                     if ((usedBits & words[i]) == 0)
                     {
-                        int[] newCombination = new int[combination.Length + 1];
                         newCombination[combination.Length] = bitwords[i];
                         combination.CopyTo(newCombination, 0);
                         int[] newWords = words.Skip(i + 1).ToArray();

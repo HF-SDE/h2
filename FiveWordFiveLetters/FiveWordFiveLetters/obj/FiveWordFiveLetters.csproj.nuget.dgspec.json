@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj": {}
+    "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj": {}
   },
   "projects": {
-    "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj": {
+    "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
+        "projectUniqueName": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
         "projectName": "FiveWordFiveLettersBLL",
-        "projectPath": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
-        "packagesPath": "C:\\Users\\pgu\\.nuget\\packages\\",
-        "outputPath": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\obj\\",
+        "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj",
+        "packagesPath": "C:\\Users\\HFGF\\.nuget\\packages\\",
+        "outputPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pgu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HFGF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,24 +59,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj": {
+    "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
+        "projectUniqueName": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
         "projectName": "FiveWordFiveLetters",
-        "projectPath": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
-        "packagesPath": "C:\\Users\\pgu\\.nuget\\packages\\",
-        "outputPath": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\obj\\",
+        "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\FiveWordFiveLetters.csproj",
+        "packagesPath": "C:\\Users\\HFGF\\.nuget\\packages\\",
+        "outputPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLetters\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pgu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HFGF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -86,15 +85,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj": {
-                "projectPath": "A:\\Udvikling\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj"
+              "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj": {
+                "projectPath": "C:\\h2\\FiveWordFiveLetters\\FiveWordFiveLettersBLL\\FiveWordFiveLettersBLL.csproj"
               }
             }
           }
@@ -124,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
