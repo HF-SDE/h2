@@ -14,23 +14,25 @@ using Label = System.Windows.Controls.Label;
 
 namespace FiveWordFiveLettersWPF
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly BackgroundWorker _worker = new();
-        private readonly ViewModel _viewModel = new();
+        private readonly Algoritme _algoritme = new();
         private readonly Utils _utils = new();
-        private int _lengthOfWord = 5;
+        private int _lengthOfLetters = 5;
         private int _lengthOfWordsCombination = 5;
         private string? _filePath;
         private List<string>? _result;
-        private readonly Algoritme _algoritme = new();
-
+        private int _currentProgress;
+        private int _maximumProgress = 100;
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<int>? MaximumProgressEvent;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel();
+            DataContext = this;
             _algoritme.Progress += ProgressChanged;
             MaximumProgressEvent += MaximumChanged;
             _worker = new()
@@ -54,15 +56,6 @@ namespace FiveWordFiveLettersWPF
             if (openFileDialog.ShowDialog() == true) fileName.Text = openFileDialog.FileName;
         }
 
-        private void FileName_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                fileName.Text = files[0];
-            }
-        }
-
         /// <summary>
         /// Handles the click event of the "Load" button, initiating data loading and processing.
         /// </summary>
@@ -79,6 +72,48 @@ namespace FiveWordFiveLettersWPF
             _filePath = fileName.Text;
             pbStatus.IsIndeterminate = true;
             _worker.RunWorkerAsync();
+        }
+        private void FileName_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                fileName.Text = files[0];
+            }
+        }
+
+        /// <summary>
+        /// Handles the click event of the "Save File" button, allowing the user to save data to a text file.
+        /// </summary>
+        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "Text file (*.txt)|*.txt"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllLines(saveFileDialog.FileName, _result!);
+
+        }
+
+        /// <summary>
+        /// Handles the event when the "Dark Mode" option is checked.
+        /// This method updates the application settings to set the color mode to "Dark" and saves the settings.
+        /// </summary>
+        private void DarkMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ColorMode = "Dark";
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Handles the event when the "Light Mode" option is checked.
+        /// This method updates the application settings to set the color mode to "Light" and saves the settings.
+        /// </summary>
+        private void LightMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ColorMode = "Light";
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>
@@ -105,32 +140,12 @@ namespace FiveWordFiveLettersWPF
         }
 
         /// <summary>
-        /// Handles the event when the "Dark Mode" option is checked.
-        /// This method updates the application settings to set the color mode to "Dark" and saves the settings.
-        /// </summary>
-        private void DarkMode_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.ColorMode = "Dark";
-            Properties.Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// Handles the event when the "Light Mode" option is checked.
-        /// This method updates the application settings to set the color mode to "Light" and saves the settings.
-        /// </summary>
-        private void LightMode_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.ColorMode = "Light";
-            Properties.Settings.Default.Save();
-        }
-
-        /// <summary>
         /// Handles the text changed event when the user enters or edits the "amountOfMatch" field.
         /// Attempts to parse the entered text as an integer, and sets the "lengthOfWord" variable accordingly.
         /// </summary>
         private void LengthOfLetters_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _ = int.TryParse(amountOfMatch.Text, out _lengthOfWord);
+            _ = int.TryParse(amountOfMatch.Text, out _lengthOfLetters);
         }
 
         /// <summary>
@@ -143,17 +158,55 @@ namespace FiveWordFiveLettersWPF
         }
 
         /// <summary>
-        /// Handles the click event of the "Save File" button, allowing the user to save data to a text file.
+        /// Validates text input to allow only numeric characters in a text box.
         /// </summary>
-        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new()
-            {
-                Filter = "Text file (*.txt)|*.txt"
-            };
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllLines(saveFileDialog.FileName, _result!);
+            Regex regex = new("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
+        /// <summary>
+        /// Updates the current progress value when a progress change event occurs.
+        /// </summary>
+        private void ProgressChanged(object? sender, int e)
+        {
+            CurrentProgress = e;
+        }
+
+        /// <summary>
+        /// Updates the maximum progress value when a maximum progress change event occurs.
+        /// </summary>
+        private void MaximumChanged(object? sender, int e)
+        {
+            MaximumProgress = e;
+        }
+
+        /// <summary>
+        /// Notifies subscribers that a property has changed.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has changed.</param>
+        protected void NotifyPropertyChange(string propertyName)
+        {
+            if (propertyName != null) PropertyChanged!(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Gets or sets the current progress value, and notifies subscribers when it changes.
+        /// </summary>
+        public int CurrentProgress
+        {
+            get { return _currentProgress; }
+            set { _currentProgress = value; NotifyPropertyChange(nameof(CurrentProgress)); }
+        }
+
+        /// <summary>
+        /// Gets or sets the maximum progress value, and notifies subscribers when it changes.
+        /// </summary>
+        public int MaximumProgress
+        {
+            get { return _maximumProgress; }
+            set { _maximumProgress = value; NotifyPropertyChange(nameof(MaximumProgress)); }
         }
 
         /// <summary>
@@ -169,14 +222,6 @@ namespace FiveWordFiveLettersWPF
             btnLoadData.IsEnabled = false;
         }
 
-        /// <summary>
-        /// Validates text input to allow only numeric characters in a text box.
-        /// </summary>
-        internal void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
 
         /// <summary>
         /// Performs background work when the background worker is running.
@@ -184,8 +229,8 @@ namespace FiveWordFiveLettersWPF
         /// </summary>
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath!, _lengthOfWord);
-            _viewModel.MaximumProgress = 100;
+            Dictionary<int, string> file = GetWords.GetWordBinary(_filePath!, _lengthOfLetters);
+            MaximumProgress = 100;
             e.Result = _algoritme.MultiTheardBinary(file, _lengthOfWordsCombination);
 
         }
@@ -202,22 +247,6 @@ namespace FiveWordFiveLettersWPF
             btnLoadData.IsEnabled = true;
             pbStatus.IsIndeterminate = false;
             pbStatus.Value = 100;
-        }
-
-        /// <summary>
-        /// Updates the current progress value when a progress change event occurs.
-        /// </summary>
-        private void ProgressChanged(object? sender, int e)
-        {
-            _viewModel.CurrentProgress = e;
-        }
-
-        /// <summary>
-        /// Updates the maximum progress value when a maximum progress change event occurs.
-        /// </summary>
-        private void MaximumChanged(object? sender, int e)
-        {
-            _viewModel.MaximumProgress = e;
         }
     };
 
