@@ -7,5 +7,6 @@ namespace Library.Interfaces
 {
     public interface IBuilder
     {
+        void Build();
     }
 }

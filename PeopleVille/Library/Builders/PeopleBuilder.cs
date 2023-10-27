@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Library.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Library.Builders
 {
-    public class PeopleBuilder
+    public class PeopleBuilder : IBuilder
     {
+        public void Build()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
