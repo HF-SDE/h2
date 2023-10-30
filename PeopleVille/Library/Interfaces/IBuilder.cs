@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Library.Interfaces
 {
-    public interface IBuilder
+    internal interface IBuilder
     {
         void Build();
     }

@@ -12,5 +12,15 @@ namespace Library.Builders
         {
             throw new NotImplementedException();
         }
+
+        public void Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Create<T>()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
