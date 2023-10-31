@@ -21,5 +21,14 @@ namespace Library.Utils
                 serializer.Serialize(file, obj);
             }
         }
+
+        internal void Update(string objToUpdate, dynamic updateTo, string fileName)
+        {
+            string jsonContent = File.ReadAllText(fileName);
+            JObject jsonData = JObject.Parse(jsonContent);
+            jsonData[objToUpdate] = updateTo;
+            string updatedJson = jsonData.ToString(Formatting.Indented);
+            File.WriteAllText(fileName, updatedJson);
+        }
     }
 }

@@ -25,6 +25,9 @@ namespace Library.Builders
             }
             Save save = new();
             save.Set(Folks, "folks.json");
+            int folksCount = Folks.Count;
+            save.Update("AmountOfFolks", folksCount, "MainData.json");
+            Console.WriteLine($"Amount of Poeple: {folksCount}");
             Console.WriteLine("Saved folks");
         }
 
