@@ -4,6 +4,7 @@
     internal record RMainData
     {
         public int AmountOfFolks { get; init; }
-        public int AmoutOfHouses { get; set; }
+        public int AmountOfHouses { get; init; }
+        public int ItemsAmounts { get; init; }
     }
 }

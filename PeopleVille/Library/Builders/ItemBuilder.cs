@@ -1,5 +1,9 @@
 ﻿using Library.Interfaces;
+using Library.Records;
 using Library.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.Json.Nodes;
 
 namespace Library.Builders
 {
@@ -7,18 +11,38 @@ namespace Library.Builders
     {
         public void Build()
         {
-            Randomizer randomizer = new();
+            JArray items = Create();
 
-            for (int i = 0; i < 10; i++)
-            {
-                string randomItemName = randomizer.GenerateRandomItemName();
-                Console.WriteLine(randomItemName);
-            }
+            Save save = new();
+            save.Set(items, "itemVariants.json");
+
+            int itemsAmounts = items.Count;
+            save.Update("ItemsAmounts", itemsAmounts, "MainData.json");
+
+            Console.WriteLine($"Amount of item variants: {itemsAmounts}");
+            Console.WriteLine("Item variants saved");
+
         }
 
-        public void Create()
+        private JArray Create()
         {
-            throw new NotImplementedException();
+            Randomizer randomizer = new();
+            int maxItems = Randomizer.Range(5, 20);
+            JArray items = new();
+            RItem item;
+            for (int i = 0; i < maxItems; i++)
+            {
+                string randomItemName = randomizer.GenerateRandomItemName();
+                float itemCost = Randomizer.Range(10.99F, 999.99F);
+                item = new() { Name = randomItemName, Cost = itemCost };
+                while (items.Contains(randomItemName))
+                {
+                    randomItemName = randomizer.GenerateRandomItemName();
+                    item = new() { Name = randomItemName, Cost = itemCost };
+                }
+                items.Add(JsonConvert.SerializeObject(item));
+            }
+            return items;
         }
     }
 }
