@@ -2,6 +2,6 @@
 {
     internal interface IBuilder
     {
-        void Build();
+        public void Build();
     }
 }
