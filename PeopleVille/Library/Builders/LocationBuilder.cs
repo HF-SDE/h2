@@ -21,8 +21,9 @@ namespace Library.Builders
             FileClass file = new();
             List<RPeople> folks = file.Get<RPeople>(ConfigurationManager.AppSettings["peopleDataFileName"]!);
 
-            int minHouse = (folks.Count() / 4) / 3 * 2;
-            int amountOfHouse = Randomizer.Range(minHouse, folks.Count() / 3);
+            int minHouse = folks.Count() / 4 / 3 * 2;
+            int maxHouse = folks.Count() / 4;
+            int amountOfHouse = Randomizer.Range(minHouse, maxHouse);
             int amountOfShops = Randomizer.Range(1, 5);
 
             JArray house = CreateHouse(amountOfHouse);

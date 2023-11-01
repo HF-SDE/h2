@@ -1,29 +1,8 @@
-﻿using Library.Builders;
-using Library.Events;
-
-namespace Library
+﻿namespace Library.Events
 {
-    public class Director
+    internal class EventHandler
     {
-        public void ConstructPeople()
-        {
-            PeopleBuilder builder = new();
-            builder.Build();
-        }
-
-        public void ConstructItems()
-        {
-            ItemBuilder builder = new();
-            builder.Build();
-        }
-
-        public void ConstructLocations()
-        {
-            LocationBuilder builder = new();
-            builder.Build();
-        }
-
-        public void FireEvent()
+        internal static void Main()
         {
             EventRaiser myObject = new();
             EventSubscriber subscriber = new();
