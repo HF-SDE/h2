@@ -1,5 +1,8 @@
 ﻿using Library.Builders;
-using Library.Events;
+using Library.Events.Main;
+using Library.Records;
+using Library.Utils;
+using System.Configuration;
 
 namespace Library
 {
@@ -25,20 +28,34 @@ namespace Library
 
         public void FireEvent()
         {
-            EventRaiser myObject = new();
-            EventSubscriber subscriber = new();
+            PaymentTransferEventPublisher publisher = new();
+            PaymentTransferEventSubscriber subscriber = new();
 
-            // Step 7: Subscribe to the event by adding the event handler method
-            myObject.MyEvent += subscriber.HandleEvent;
 
-            // Step 8: Call a method that raises the event
-            myObject.DoSomething();
+            FileClass file = new();
+            List<RPeople> peoples = file.Get<RPeople>(ConfigurationManager.AppSettings["peopleDataFileName"]!);
+            int amountOfTravelers = Randomizer.Range(0, peoples.Count / 3);
+            HashSet<string> usedPersons = new();
 
-            // Step 9: Unsubscribe from the event (optional)
-            myObject.MyEvent -= subscriber.HandleEvent;
+            subscriber.Subscribe(publisher);
+            for (int i = 0; i < amountOfTravelers; i++)
+            {
+                string personUuid = Randomizer.RandomPerson();
+                string shopUuid = Randomizer.RandomShop();
+                while (usedPersons.Contains(personUuid))
+                {
+                    personUuid = Randomizer.RandomPerson();
 
-            // Calling the method again won't trigger the event for the unsubscribed handler
-            myObject.DoSomething();
+                }
+
+                usedPersons.Add(personUuid);
+                publisher.RaiseEvent(PaymentTransferEventArgs.Actions.ShopTravel, personUuid, shopUuid);
+
+
+            }
+
+            subscriber.Unsubscribe(publisher);
+
         }
     }
 }

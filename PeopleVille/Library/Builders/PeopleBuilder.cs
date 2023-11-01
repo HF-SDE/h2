@@ -54,7 +54,7 @@ namespace Library.Builders
             Guid uuid = Guid.NewGuid();
             float money = Randomizer.Range(1.0F, 99999.0F);
             
-            RPeople instance = new() { UUID = uuid.ToString(), Coins = money, Home = "", Inventory = items };
+            RPeople instance = new() { UUID = uuid.ToString(), Coins = money, Home = "", Inventory = items, Logs = new() };
             return instance;
         }
     }
