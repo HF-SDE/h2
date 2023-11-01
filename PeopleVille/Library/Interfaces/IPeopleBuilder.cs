@@ -8,7 +8,7 @@ namespace Library.Interfaces
         private static RPeople Create() 
         {
             List<RItem> items = new();
-            RPeople rPeople = new() { UUID = "", Coins = 0.00F, Home = "", Inventory = items };
+            RPeople rPeople = new() { UUID = "", Coins = 0.00F, Home = "", Inventory = items, Logs = new()};
             return rPeople;
         }
     }

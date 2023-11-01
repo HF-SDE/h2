@@ -4,9 +4,9 @@
     {
         internal event PaymentTransferEventHandler PaymentTransferEvent;
 
-        internal void RaiseEvent(string entityUUID, string toUuid = "")
+        internal void RaiseEvent(float amount, string entityUUID, string toUuid = "")
         {
-            OnPaymentTransferEvent(new PaymentTransferEventArgs(entityUUID, toUuid));
+            OnPaymentTransferEvent(new PaymentTransferEventArgs(amount, entityUUID, toUuid));
         }
 
         protected virtual void OnPaymentTransferEvent(PaymentTransferEventArgs e)

@@ -6,6 +6,18 @@ namespace Library.Utils
 {
     internal class FileClass
     {
+
+        internal void SaveHelper<T>(string fileName, List<T> data)
+        {
+            JArray jArray = new();
+
+            foreach (var item in data)
+            {
+                jArray.Add(JsonConvert.SerializeObject(item));
+            }
+            Save(jArray, fileName);
+        }
+
         internal void Save(JArray obj, string fileName)
         {
             using (StreamWriter file = File.CreateText(fileName))

@@ -1,4 +1,6 @@
-﻿namespace Library.Interfaces
+﻿using Library.Events.PaymentTransfer;
+
+namespace Library.Interfaces
 {
     internal interface IPaymentTransferEvent
     {

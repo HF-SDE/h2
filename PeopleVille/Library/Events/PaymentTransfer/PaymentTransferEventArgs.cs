@@ -3,12 +3,14 @@
     internal class PaymentTransferEventArgs : EventArgs
     {
 
-        internal PaymentTransferEventArgs(string uuid, string toUuid = "")
+        internal PaymentTransferEventArgs(float amount, string uuid, string toUuid = "")
         {
             EntityUUID = uuid;
             ToUUID = toUuid;
+            Amount = amount;
         }
 
+        internal float Amount { get; set; }
         internal string EntityUUID { get; set; }
         internal string ToUUID { get; set; }
     }

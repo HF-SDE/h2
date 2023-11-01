@@ -131,7 +131,7 @@ namespace Library.Builders
 
             int personIndex = peoples.FindIndex(person => person.UUID == memberUUID);
 
-            person = new() {Coins = person.Coins, Home = houseUUID, Inventory = person.Inventory, UUID = person.UUID};
+            person = new() {Coins = person.Coins, Home = houseUUID, Inventory = person.Inventory, UUID = person.UUID, Logs = new()};
             peoples.RemoveAt(personIndex);
             peoples.Insert(personIndex, person);
 

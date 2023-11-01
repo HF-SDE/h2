@@ -1,5 +1,6 @@
 ﻿using Library.Builders;
 using Library.Events.Main;
+using Library.Events.PaymentTransfer;
 using Library.Records;
 using Library.Utils;
 using System.Configuration;
@@ -28,14 +29,16 @@ namespace Library
 
         public void FireEvent()
         {
-            PaymentTransferEventPublisher publisher = new();
-            PaymentTransferEventSubscriber subscriber = new();
-
-
             FileClass file = new();
             List<RPeople> peoples = file.Get<RPeople>(ConfigurationManager.AppSettings["peopleDataFileName"]!);
-            int amountOfTravelers = Randomizer.Range(0, peoples.Count / 3);
+
+
+            #region Travelers
+            TravelEventPublisher publisher = new();
+            TravelEventSubscriber subscriber = new();
             HashSet<string> usedPersons = new();
+
+            int amountOfTravelers = Randomizer.Range(0, peoples.Count / 3);
 
             subscriber.Subscribe(publisher);
             for (int i = 0; i < amountOfTravelers; i++)
@@ -49,12 +52,37 @@ namespace Library
                 }
 
                 usedPersons.Add(personUuid);
-                publisher.RaiseEvent(PaymentTransferEventArgs.Actions.ShopTravel, personUuid, shopUuid);
+                publisher.RaiseEvent(personUuid, shopUuid);
+            }
+            subscriber.Unsubscribe(publisher);
+            #endregion
+
+            #region PaymentTransfers
+            PaymentTransferEventPublisher paymentTransferPublisher = new();
+            PaymentTransferEventSubscriber paymentTransfersubscriber = new();
+            HashSet<string> usedPersonsPayment = new();
+
+            int amountOfPayer = Randomizer.Range(0, peoples.Count / 3);
+            paymentTransfersubscriber.Subscribe(paymentTransferPublisher);
+            for (int i = 0; i < amountOfPayer; i++)
+            {
+                string personUuid = Randomizer.RandomPerson();
+                string receiverUuid = Randomizer.RandomPerson();
+
+                while (usedPersonsPayment.Contains(personUuid))
+                {
+                    personUuid = Randomizer.RandomPerson();
+
+                }
+
+                usedPersonsPayment.Add(personUuid);
+
+                paymentTransferPublisher.RaiseEvent(Randomizer.Range(50.00F, 5000.00F), personUuid, receiverUuid);
 
 
             }
-
-            subscriber.Unsubscribe(publisher);
+            paymentTransfersubscriber.Unsubscribe(paymentTransferPublisher);
+            #endregion
 
         }
     }
