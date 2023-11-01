@@ -3,7 +3,7 @@ using Library.Records;
 using Library.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Text.Json.Nodes;
+using System.Configuration;
 
 namespace Library.Builders
 {
@@ -12,18 +12,19 @@ namespace Library.Builders
         public void Build()
         {
             JArray items = Create();
-            items = new JArray(items.OrderBy(jv => jv.ToString(), StringComparer.OrdinalIgnoreCase));
+            //items = new JArray(items.OrderBy(jv => jv.ToString(), StringComparer.OrdinalIgnoreCase));
 
             //foreach (var item in items)
             //{
             //    Console.WriteLine(item);
-            //}
+                //}
 
             FileClass file = new();
-            file.Save(items, "itemVariants.json");
+            Console.WriteLine(ConfigurationManager.AppSettings["itemVariantsFileName"]!);
+            file.Save(items, ConfigurationManager.AppSettings["itemVariantsFileName"]!);
 
             int itemsAmounts = items.Count;
-            file.Update("ItemsAmounts", itemsAmounts, "MainData.json");
+            file.Update("ItemsAmounts", itemsAmounts, ConfigurationManager.AppSettings["mainDataFileName"]!);
 
             Console.WriteLine($"Amount of item variants: {itemsAmounts}");
             Console.WriteLine("Item variants saved");
@@ -52,11 +53,6 @@ namespace Library.Builders
                 items.Add(JsonConvert.SerializeObject(item));
             }
             return items;
-        }
-
-        public void Distribute()
-        {
-            throw new NotImplementedException();
         }
     }
 }

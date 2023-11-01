@@ -8,12 +8,17 @@ namespace Library
         {
             PeopleBuilder builder = new();
             builder.Build();
-            builder.Distribute();
         }
 
         public void ConstructItems()
         {
             ItemBuilder builder = new();
+            builder.Build();
+        }
+
+        public void ConstructLocations()
+        {
+            LocationBuilder builder = new();
             builder.Build();
         }
     }

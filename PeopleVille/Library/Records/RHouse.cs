@@ -4,6 +4,6 @@
     internal record RHouse : RLocation
     {
         public required List<string> Members { get; init; }
-        public required int MaxMembers { get; init; }
+        public int MaxMembers { get; init; } = 4;
     }
 }
