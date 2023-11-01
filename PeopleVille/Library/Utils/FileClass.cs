@@ -27,13 +27,13 @@ namespace Library.Utils
             try
             {
                 string jsonText = File.ReadAllText(fileName);
-                List<string> jsonStrings = JsonConvert.DeserializeObject<List<string>>(jsonText);                
+                List<string> jsonStrings = JsonConvert.DeserializeObject<List<string>>(jsonText)!;                
 
                 List<T> result = new();
 
                 foreach (string jsonString in jsonStrings)
                 {
-                    T item = JsonConvert.DeserializeObject<T>(jsonString);
+                    T item = JsonConvert.DeserializeObject<T>(jsonString)!;
                     result.Add(item);
                 }
                 return result!;

@@ -16,7 +16,7 @@ namespace Library.Interfaces
         [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
         private static JArray CreateHouse(int amountOfHouse) { return new JArray(amountOfHouse); }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
         private static JArray CreateShops(int amountOfShops) { return new JArray(); }
 
         void HouseGiver(string houseUUID, List<RPeople> peoples, string memberUUID) { }
