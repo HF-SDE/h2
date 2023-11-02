@@ -1,14 +1,7 @@
 ﻿using Library.Interfaces;
 using Library.Records;
 using Library.Utils;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Configuration;
-using System.Drawing;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Library.Events.PaymentTransfer
 {
@@ -46,7 +39,7 @@ namespace Library.Events.PaymentTransfer
             if(senderCoins < e.Amount)
             {
                 text = $"Payment canceled not enough money. Sender: {senderUuid} Amount: {e.Amount} Receiver: {e.ToUUID} ";
-                Console.WriteLine($"{travelTime.FromClock}: {text}");
+                Console.WriteLine($"{day.ToString()} {travelTime.FromClock}: {text}");
                 logger.Log(fileName, senderUuid, day.Get(), travelTime.FromClock, text);
                 return;
             }
