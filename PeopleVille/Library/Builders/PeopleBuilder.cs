@@ -9,7 +9,7 @@ namespace Library.Builders
 {
     public class PeopleBuilder : IPeopleBuilder
     {
-        private readonly FileClass file = new();
+        private readonly FileClass _file = new();
         public void Build()
         {
             JArray Folks = new();
@@ -26,10 +26,10 @@ namespace Library.Builders
                 uniqueGuids.Add(Guid.Parse(people.UUID));
                 //Console.WriteLine(JsonConvert.SerializeObject(Create()));
             }
-            file.Save(Folks, ConfigurationManager.AppSettings["peopleDataFileName"]!);
+            _file.Save(Folks, ConfigurationManager.AppSettings["peopleDataFileName"]!);
 
             int folksCount = Folks.Count;
-            file.Update("AmountOfFolks", folksCount, ConfigurationManager.AppSettings["mainDataFileName"]!);
+            _file.Update("AmountOfFolks", folksCount, ConfigurationManager.AppSettings["mainDataFileName"]!);
 
             Console.WriteLine($"Amount of Poeple: {folksCount}");
             Console.WriteLine("Saved folks");
@@ -37,7 +37,7 @@ namespace Library.Builders
 
         private RPeople Create()
         {
-            dynamic fileItem = file.Get<RItem>(ConfigurationManager.AppSettings["itemVariantsFileName"]!);
+            dynamic fileItem = _file.Get<RItem>(ConfigurationManager.AppSettings["itemVariantsFileName"]!);
             if (fileItem.GetType() != typeof(List<RItem>))
             {
                 Console.WriteLine("Error in distribute items or homes to people");
