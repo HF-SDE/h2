@@ -39,7 +39,7 @@ namespace Library.Events.PaymentTransfer
             if(senderCoins < e.Amount)
             {
                 text = $"Payment canceled not enough money. Sender: {senderUuid} Amount: {e.Amount} Receiver: {e.ToUUID} ";
-                Console.WriteLine($"{day.ToString()} {travelTime.FromClock}: {text}");
+                Console.WriteLine($"{day.ToString()} day {travelTime.FromClock}: {text}");
                 logger.Log(fileName, senderUuid, day.Get(), travelTime.FromClock, text);
                 return;
             }
@@ -59,7 +59,7 @@ namespace Library.Events.PaymentTransfer
 
 
             text = $"{senderUuid} payed {e.Amount} to {e.ToUUID}";
-            Console.WriteLine($"{travelTime.FromClock}: {text}");
+            Console.WriteLine($"{day} day {travelTime.FromClock}: {text}");
             logger.Log(fileName, senderUuid, day.Get(), travelTime.FromClock, text);
         }
     }

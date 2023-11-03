@@ -112,7 +112,7 @@ namespace Library.Builders
                     float cost = Randomizer.Range(item.Cost / 3 * 2, item.Cost / 3 * 4);
                     itemsWithAmount.Add(new() { Name = item.Name, Cost = cost, Amount = amount });
                 }
-                Console.WriteLine($"Shop: {uuid} have {resultItems.Count()} amount of defrent items");
+                Console.WriteLine($"Shop: {uuid} have {resultItems.Count()} amount of unique items");
                 shop = new() { UUID = uuid.ToString(), Type = "Shop", Items = itemsWithAmount };
                 shops.Add(JsonConvert.SerializeObject(shop));
             }

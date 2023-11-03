@@ -27,6 +27,18 @@ namespace Library
             builder.Build();
         }
 
+        public void NextDay()
+        {
+            Day day = new();
+            day.AddDay();
+        }
+
+        public void ResetDay()
+        {
+            Day day = new();
+            day.ResetDay();
+        }
+
         public void FireEvent()
         {
             FileClass file = new();

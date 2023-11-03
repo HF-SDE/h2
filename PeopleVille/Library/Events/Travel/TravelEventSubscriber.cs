@@ -30,15 +30,15 @@ namespace Library.Events.Main
             string fileName = ConfigurationManager.AppSettings["peopleDataFileName"]!;
 
             string text = $"{personUuid} traveled to {locationUuid}";
-            Console.WriteLine($"{travelTime.FromClock}: {text}");
+            Console.WriteLine($"{day} day {travelTime.FromClock}: {text}");
             logger.Log(fileName, personUuid, day.Get(), travelTime.FromClock, text);
 
             text = $"{personUuid} was leaving {locationUuid}";
-            Console.WriteLine($"{travelTime.ToClock}: {text}");
+            Console.WriteLine($"{day} day {travelTime.ToClock}: {text}");
             logger.Log(fileName, personUuid, day.Get(), travelTime.ToClock, text);
 
             text = $"{personUuid} was away from home in the time period";
-            Console.WriteLine($"{travelTime} {text}");
+            Console.WriteLine($"{day} day {travelTime} {text}");
             logger.Log(fileName, personUuid, day.Get(), travelTime.ToString(), text);
         }
     }
