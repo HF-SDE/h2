@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="Library.Director">
+    <Position X="9.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAEAAAAAAAEAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Director.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object">
+    <Position X="35.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Library.Events.PaymentTransfer.PaymentTransferEventPublisher">
+    <Position X="12.75" Y="4" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAEAAAAA=</HashCode>
+      <FileName>Events\PaymentTransfer\PaymentTransferEventPublisher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Events.PaymentTransfer.PaymentTransferEventSubscriber">
+    <Position X="18" Y="4" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAACAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Events\PaymentTransfer\PaymentTransferEventSubscriber.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Class Name="Library.Events.Main.TravelEventPublisher">
+    <Position X="23.75" Y="4" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Events\Travel\TravelEventPublisher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Events.Main.TravelEventSubscriber">
+    <Position X="28.25" Y="4" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAACAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Events\Travel\TravelEventSubscriber.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Class Name="Library.Utils.FileClass">
+    <Position X="35" Y="4" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAAAABAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\FileClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Utils.Load">
+    <Position X="48.75" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Load.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Utils.Logger">
+    <Position X="55.75" Y="4" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Utils.NumberConverter">
+    <Position X="61.25" Y="4" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Utils\NumberConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Utils.Randomizer">
+    <Position X="52.25" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABgACCAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Utils\Randomizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Events.Main.TravelEventArgs">
+    <Position X="17.75" Y="8.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\Travel\TravelEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.EventArgs">
+    <Position X="21.5" Y="6" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Library.Events.PaymentTransfer.PaymentTransferEventArgs">
+    <Position X="22" Y="8.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\PaymentTransfer\PaymentTransferEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Library.Builders.ItemBuilder">
+    <Position X="32.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Builders\ItemBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Class Name="Library.Builders.LocationBuilder">
+    <Position X="40.25" Y="4" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAEAAAAAAAAAAAAgAAAgEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Builders\LocationBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Class Name="Library.Builders.PeopleBuilder">
+    <Position X="46.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAAAAAAAAEAA=</HashCode>
+      <FileName>Builders\PeopleBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Struct Name="Library.Utils.Day">
+    <Position X="23.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABEAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Day.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Library.Interfaces.ITravelEvent">
+    <Position X="25.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAACAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITravelEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Library.Interfaces.IBuilder">
+    <Position X="11.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Library.Interfaces.IItemBuilder">
+    <Position X="7.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IItemBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Library.Interfaces.ILocationBuilder">
+    <Position X="9.75" Y="8.25" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAEAAAAAAAAAAAAgAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ILocationBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Library.Interfaces.IPeopleBuilder">
+    <Position X="15.75" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IPeopleBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Library.Events.PaymentTransfer.PaymentTransferEventHandler">
+    <Position X="27.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\PaymentTransfer\PaymentTransferEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Library.Events.Main.TravelEventHandler">
+    <Position X="29.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Events\Travel\TravelEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
