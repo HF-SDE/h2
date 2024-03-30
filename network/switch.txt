@@ -1,0 +1,121 @@
+SK-SW01#show ru
+Building configuration...
+
+Current configuration : 2817 bytes
+!
+! Last configuration change at 00:01:01 UTC Mon Jan 2 2006
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname SK-SW01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable password cisco123
+!
+username admin secret 5 $1$yFrM$1vP0IL8iMMhXHnopBMJ0y1
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3531921024
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3531921024
+ revocation-check none
+ rsakeypair TP-self-signed-3531921024
+!
+!
+crypto pki certificate chain TP-self-signed-3531921024
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 33353331 39323130 3234301E 170D3036 30313032 30303031
+  30375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  ...
+  2A864886 F70D0101 05050003 81810022 624E8C67 F6BC20D9 0B54A024 E21B875B
+  E4C51104 AD824B2E B1826F0C 2BEDE726 BEFFAD93 61878924 89CE3112 59016604
+  577A85D1 0DF1861A 294F44E9 498A1E6B 4D44F6BB 9D45FBF1 943AE90C B8E10853
+  5A27D524 BC3CE956 DD24BA3D D0E3F09F 5B821A49 4B9BA0E5 CFFAAD0D 0B08C708
+  4018D65E 2B07FDE1 C1AC79FD A77232
+        quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 192.168.20.11 255.255.255.0
+!
+ip default-gateway 192.168.20.1
+ip http server
+ip http secure-server
+!
+ip ssh version 2
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+end

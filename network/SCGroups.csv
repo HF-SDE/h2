@@ -1,0 +1,6 @@
+Name;SamAccountName;DisplayName;OU;Description
+GS-Admins;GSAdmins;Administrators;OU=SECURITYGROUPS,OU=MUNKEBJERG;Members of this group are Administrators and can do all
+GS-IT;GSIT;IT;OU=SECURITYGROUPS,OU=MUNKEBJERG;Members of this group are working in the it darpartment
+GS-Externel;GSEXTERNEL;Externel User;OU=SECURITYGROUPS,OU=MUNKEBJERG;Members of this group are externel users
+GS-Revisor;GSREVISOR;Revisor;OU=SECURITYGROUPS,OU=MUNKEBJERG;Members of this group are revisor
+GS-Administration;GSADMINISTRATION;Administration;OU=SECURITYGROUPS,OU=MUNKEBJERG;Members of this group are wokring in the Administration department

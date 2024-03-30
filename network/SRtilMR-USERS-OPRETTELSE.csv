@@ -1,0 +1,12 @@
+﻿Firstname;Lastname;initials;Username;Emaildomain;StreetAddress;City;ZipCode;DK;Department;Password;Telephone;Description;Company;OU;SCGroup
+Grace;Thompson;GTH;GTH;munkebjerg.dk;Skibhust 130;Odense;5230;DK;IT;P@ssword1;86364714;IT-Person;munkebjerg;OU=MUNKEBJERG,OU=IT,OU=USERS;GSAdmins
+Mae;Carter;MSU;MSU;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Administration;P@ssword1;86364714;Administration;munkebjerg;OU=MUNKEBJERG,OU=ADMINISTRATION,OU=USERS;GSADMINISTRATION
+Alexande;"Mitchell ";ACA;ACA;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Administration;P@ssword1;86364714;Administration;munkebjerg;OU=MUNKEBJERG,OU=ADMINISTRATION,OU=USERS;GSADMINISTRATION
+Elizabeth;Foste;EFO;EFO;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+James;Anderson;JAN;JAN;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+Claire;Parker;CPA;CPA;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+William;Taylor;WTA;WTA;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+Harper;Davis;HDA;HDA;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+Michael;Collins;MCO;MCO;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+Amelia;Turner;ATU;ATU;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
+Christopher;Martin;CMA;CMA;munkebjerg.dk;Skibhust 130;Odense;5230;DK;Revisor;P@ssword1;86364714;Revisor;munkebjerg;OU=MUNKEBJERG,OU=REVISOR,OU=USERS;GSREVISOR
